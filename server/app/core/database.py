@@ -5,8 +5,6 @@ from typing import Optional, Union, Dict, Any, Sequence, Literal
 from functools import lru_cache
 
 class DBManager:
-    
-    _instance = None
     def __init__(self, db_url: str) -> "DBManager":
         self.engine: AsyncEngine = create_async_engine(
             self.db_url,
