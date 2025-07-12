@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.core import router as db_router
-from app.graphql import router as analytics_router
+from app.graphql.db.router import router as db_router
+from app.graphql.analytics.router import router as  analytics_router
 from app.logger import AppLogger
 
 AppLogger("app")
