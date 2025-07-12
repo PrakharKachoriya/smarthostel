@@ -1,0 +1,21 @@
+import strawberry
+
+@strawberry.type
+class MealPending_PieChart:
+    title: list[str]
+    values: list[int]
+
+@strawberry.type
+class MealTime_LineChart:
+    time_values: list[float]
+    values: list[int]
+
+@strawberry.type
+class FoodRating_LineChart:
+    ratings: list[int]
+    counts: list[int]
+
+@strawberry.type
+class FloorWiseCount_DoubleBarChart:
+    floors: list[int]
+    status_wise_counts: list[tuple[int, int]]
