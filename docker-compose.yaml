@@ -1,3 +1,5 @@
+version: 3.8
+
 services:
   frontend:
     build: ./frontend
@@ -7,22 +9,37 @@ services:
       - ./frontend:/app
       - /app/node_modules
     depends_on:
-      - backend
+      - server
 
-  backend:
+  server:
     build: ./backend
     ports:
-      - "5000:5000"
+      - "8000:8000"
     volumes:
       - ./backend:/app
       - /app/node_modules
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-    depends_on:
-      - redis
+  
+  db:
+    image: postgres
+    container_name: smartpg_db
+    environment:
+      POSTGRES_USER: batlahouse
+      POSTGRES_PASSWORD: wandervibez
+      POSTGRES_DB: smartpg
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 
   redis:
     image: redis:alpine
     ports:
       - "6379:6379"
+  
+volumes:
+  postgres_data:
+
