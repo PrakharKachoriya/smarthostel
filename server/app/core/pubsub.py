@@ -1,6 +1,7 @@
 import asyncio
 from typing import Callable
 from abc import ABC, abstractmethod
+from functools import lru_cache
 
 class PubSubQueue(ABC):
     def __init__(self):
@@ -112,3 +113,19 @@ class MultiWorkerPubSubQueue(PubSubQueue):
                     print(f"Worker {worker_id} giving up on task {task} after {self._max_retries} retries")
                     break
                 await asyncio.sleep(self._retry_delay * attempt)
+
+
+@lru_cache
+def get_pubsub_queue(
+    queue_type: str = "single",
+    concurrency: int = 4,
+    max_retries: int = 3,
+    retry_delay: float = 1.0
+) -> PubSubQueue:
+    """Factory function to get a PubSubQueue instance."""
+    if queue_type == "single":
+        return SingleWorkerPubSubQueue()
+    elif queue_type == "multi":
+        return MultiWorkerPubSubQueue(concurrency, max_retries, retry_delay)
+    else:
+        raise ValueError(f"Unknown queue type: {queue_type}")
