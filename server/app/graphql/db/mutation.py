@@ -1,7 +1,7 @@
 import strawberry
 from strawberry.types import Info
 
-from app.graphql.db.types import TenantInput, MealActivityInput
+from app.graphql.db.types import Tenant, MealActivity, TenantInput, MealActivityInput
 
 
 @strawberry.type
