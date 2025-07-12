@@ -44,8 +44,6 @@ class SingleWorkerTriggerQueue(TriggerQueue):
                 
             self._worker = None
     
-    
-    
     async def _run(self, handler: Callable):
         try:
             while not self.is_off():

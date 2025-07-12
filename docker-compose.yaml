@@ -18,8 +18,11 @@ services:
     volumes:
       - ./server:/app
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: batlahouse
+      DB_PASSWORD: wandervibez
+      DB_NAME: smartpg
   
   db:
     image: postgres
