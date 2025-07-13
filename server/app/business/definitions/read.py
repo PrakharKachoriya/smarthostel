@@ -1,6 +1,7 @@
 from app.core.database import get_db_manager
 from app.config import DB_URL
 
+
 async def get_mealpending_data(meal_type: str, date: str = "CURRENT_DATE"):
     query = """
         WITH tenants AS (
@@ -130,7 +131,7 @@ async def get_floorwisecount_data(meal_type: str, floor_number: int, date: str =
         
     
 
-async def get_mealtime_data(meal_type:str,date: str = 'CURRENT_DATE'):
+async def get_mealtime_data(meal_type:str, date: str = 'CURRENT_DATE'):
     query = """
         WITH time_data AS (
             SELECT tenant_id, TO_CHAR(timestamp::time, 'HH24:MI' ) AS time_value 
@@ -160,7 +161,7 @@ async def get_foodrating_data(meal_type: str, date: str = "CURRENT_DATE"):
     query = """
         WITH ratings AS (
             SELECT tenant_id, rating
-            FROM analytics.food_rating_fact
+            FROM analytics.meal_activity_fact
             WHERE meal_type = :meal_type AND timestamp::date = :date
         )
         
@@ -180,4 +181,32 @@ async def get_foodrating_data(meal_type: str, date: str = "CURRENT_DATE"):
         return result
     except Exception as e:
         print(f"Error fetching food rating data: {e}")
+        return None
+
+
+async def get_tenants():
+    query = """
+        SELECT *
+        FROM master.tenants_dim
+    """
+    db_manager = get_db_manager(DB_URL)
+    try:
+        result = await db_manager.execute(query)
+        return result
+    except Exception as e:
+        print(f"Error printing all tenants {e}")
+        return None
+
+
+async def get_mealactivity():
+    query = """
+        SELECT *
+        FROM analytics.meal_activity_fact
+    """
+    db_manager = get_db_manager(DB_URL)
+    try:
+        result = await db_manager.execute(query)
+        return result
+    except Exception as e:
+        print(f"Error printing all tenants {e}")
         return None
