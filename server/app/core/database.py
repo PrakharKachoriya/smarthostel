@@ -1,11 +1,16 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncConnection
 from sqlalchemy.engine import Row
 from sqlalchemy import text
-from typing import Optional, Union, Dict, Any, Sequence, Literal
+from typing import Optional, Union, Dict, Any, Sequence, Literal, AsyncGenerator
 from functools import lru_cache
 
 class DBManager:
     def __init__(self, db_url: str) -> "DBManager":
+        self.db_url = db_url
+        self.engine = None
+    
+    @property
+    def engine(self) -> AsyncEngine:
         self.engine: AsyncEngine = create_async_engine(
             self.db_url,
             echo=True,
@@ -46,7 +51,7 @@ class DBManager:
         sql_query: str,
         params: Optional[Union[Dict[str, Any], Sequence[Dict[str, Any]]]] = None,
         fetch: Literal["all", "one", "none"] = "all",
-    ) -> AsyncConnection:
+    ) -> AsyncGenerator[Any, Any]:
         """Streams results of a SQL query.
         
         Keyword arguments:

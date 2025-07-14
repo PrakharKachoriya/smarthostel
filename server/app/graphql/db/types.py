@@ -15,8 +15,8 @@ class MealActivity:
     tenant_id: int
     room_number: int
     meal_type: str
-    timestamp: float | None
-    rating: int
+    timestamp: float | None = None
+    rating: int | None = None
 
 
 @strawberry.input

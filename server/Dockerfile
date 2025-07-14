@@ -1,5 +1,5 @@
 # ---- Stage 1: Build dependencies ----
-FROM python:3.11-slim AS builder
+FROM python:3.12-slim-bookworm AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN pip install --upgrade pip
 RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
 # ---- Stage 2: Runtime container ----
-FROM python:3.11-slim
+FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
