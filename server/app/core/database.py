@@ -7,18 +7,20 @@ from functools import lru_cache
 class DBManager:
     def __init__(self, db_url: str) -> "DBManager":
         self.db_url = db_url
-        self.engine = None
+        self._engine = None
     
     @property
     def engine(self) -> AsyncEngine:
-        self.engine: AsyncEngine = create_async_engine(
-            self.db_url,
-            echo=True,
-            pool_size=20,
-            max_overflow=10,
-            pool_timeout=30,
-            pool_recycle=1800
-        )
+        if self._engine is None:
+            self._engine = create_async_engine(
+                self.db_url,
+                echo=True,
+                pool_size=20,
+                max_overflow=10,
+                pool_timeout=30,
+                pool_recycle=1800
+            )
+        return self._engine
     
     async def execute(
         self,

@@ -1,5 +1,3 @@
-version: 3.8
-
 services:
   frontend:
     build: ./frontend
@@ -12,7 +10,7 @@ services:
       - server
 
   server:
-    build: ./backend
+    build: ./server
     ports:
       - "8000:8000"
     volumes:
@@ -27,14 +25,14 @@ services:
       - db
   
   db:
-    image: postgres
+    image: postgres:17.5
     container_name: smartpg_db
     environment:
       POSTGRES_USER: batlahouse
       POSTGRES_PASSWORD: wandervibez
       POSTGRES_DB: smartpg
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

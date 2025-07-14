@@ -4,4 +4,4 @@ sqlalchemy
 psycopg2-binary
 python-dotenv
 asyncpg
-'strawberry-graphql[fastapi]'
+strawberry-graphql[fastapi]

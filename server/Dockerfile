@@ -25,11 +25,11 @@ COPY --from=builder /app/requirements.txt .
 RUN pip install --no-cache-dir --no-index --find-links=/wheels -r requirements.txt
 
 # Copy your application code
-COPY app .
+COPY app /app
 
 # Optional: environment and default command
 ENV PYTHONUNBUFFERED=1
 
 # Entry point of app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     

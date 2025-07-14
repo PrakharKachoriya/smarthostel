@@ -9,8 +9,12 @@ from app.business.definitions.read import get_tenants, get_mealactivity
 class Query:
     @strawberry.field
     async def get_tenants(self, info: Info) -> list[Tenant]:
-        return [Tenant(**row) async for row in get_tenants()]
+        async for row in get_tenants():
+            print(row)
+        return []
     
     @strawberry.field
     async def get_mealactivity(self, info: Info) -> list[MealActivity]:
-        return [MealActivity(**row) async for row in get_tenants()]
+        async for row in get_mealactivity():
+            print(row)
+        return []
