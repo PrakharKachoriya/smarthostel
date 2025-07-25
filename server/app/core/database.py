@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncConnection
 from sqlalchemy.engine import Row
 from sqlalchemy import text
+from sqlalchemy.sql.elements import TextClause
 from typing import Optional, Union, Dict, Any, Sequence, Literal, AsyncGenerator
 from functools import lru_cache
 
@@ -52,7 +53,6 @@ class DBManager:
         self,
         sql_query: str,
         params: Optional[Union[Dict[str, Any], Sequence[Dict[str, Any]]]] = None,
-        fetch: Literal["all", "one", "none"] = "all",
     ) -> AsyncGenerator[Any, Any]:
         """Streams results of a SQL query.
         
@@ -66,16 +66,16 @@ class DBManager:
         query = text(sql_query)
         
         async with self.engine.connect() as conn:
-            async for row in self._run(conn, query, params, fetch, stream=True):
+            result = await conn.execute(query, params or {})
+            async for row in result:
                 yield dict(row._mapping)
-                
+    
     async def _run(
         self,
         conn: AsyncConnection,
-        query: str,
+        query: TextClause,
         params: Optional[Union[Dict[str, Any], Sequence[Dict[str, Any]]]] = None,
         fetch: Literal["all", "one", "none"] = "all",
-        stream: bool = False
     ) -> Union[None, Sequence[Dict[str, Any]], Dict[str, Any]]:
         """Executes the query with the given connection.
         
@@ -87,17 +87,13 @@ class DBManager:
         Return: Query results based on fetch and stream type.
         """
         
-        if stream:
-            result = await conn.stream(query, params or {})
-            return result
-        
         result = await conn.execute(query, params or {})
         
         if fetch == "one":
-            row: Optional[Row] = result.fetchone()
+            row: Optional[Row] = await result.fetchone()
             return dict(row._mapping) if row else {}
         elif fetch == "all":
-            rows: Sequence[Row] = result.fetchall()
+            rows: Sequence[Row] = await result.fetchall()
             return [dict(row._mapping) for row in rows]
         
         return None

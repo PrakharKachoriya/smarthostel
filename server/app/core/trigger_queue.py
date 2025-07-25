@@ -114,7 +114,7 @@ class MultiWorkerTriggerQueue(TriggerQueue):
 
 
 @lru_cache
-def get_pubsub_queue(
+def get_trigger_queue(
     queue_type: str = "single",
     concurrency: int = 4,
     max_retries: int = 3,
