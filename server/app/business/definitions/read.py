@@ -191,7 +191,9 @@ async def get_tenants():
     """
     db_manager = get_db_manager(DB_URL)
     try:
-        for row in await db_manager.execute(query):
+        
+        result = await db_manager.execute(query)
+        for row in result:
             yield row
     except Exception as e:
         print(f"Error printing all tenants {e}")
@@ -205,7 +207,8 @@ async def get_mealactivity():
     """
     db_manager = get_db_manager(DB_URL)
     try:
-        for row in await db_manager.execute(query):
+        result = await db_manager.execute(query)
+        for row in result:
             yield row
     except Exception as e:
         print(f"Error printing all tenants {e}")

@@ -70,6 +70,17 @@ class DBManager:
             async for row in result:
                 yield dict(row._mapping)
     
+    async def run_ddl(
+        self,
+        sql_query: str,
+    ) -> AsyncGenerator[Any, Any]:
+        
+        query = text(sql_query)
+        
+        async with self.engine.begin() as conn:
+            result = await conn.execute(query, {})
+            return None
+    
     async def _run(
         self,
         conn: AsyncConnection,
@@ -88,12 +99,15 @@ class DBManager:
         """
         
         result = await conn.execute(query, params or {})
+        print(result)
         
         if fetch == "one":
-            row: Optional[Row] = await result.fetchone()
+            row: Optional[Row] = result.fetchone()
             return dict(row._mapping) if row else {}
         elif fetch == "all":
-            rows: Sequence[Row] = await result.fetchall()
+            rows: Sequence[Row] = result.fetchall()
+            for row in rows:
+                print(row, row._mapping)
             return [dict(row._mapping) for row in rows]
         
         return None

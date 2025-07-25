@@ -4,10 +4,11 @@ from typing import Optional
 
 @strawberry.type
 class Tenant:
-    id: int
+    id: str
     name: str
     email: str
     room_number: int
+    kyc: bool = False
 
 
 @strawberry.type
