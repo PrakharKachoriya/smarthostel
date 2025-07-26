@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.logger import AppLogger
+from app.graphql.analytics.aggregator import lifespan
 from app.graphql.router import graphql_router
 
 AppLogger("app")
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 # Add CORS middleware
 app.add_middleware(

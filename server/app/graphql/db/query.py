@@ -2,7 +2,10 @@ import strawberry
 from strawberry.types import Info
 
 from app.graphql.db.types import Tenant, MealActivity
-from app.business.definitions.read import get_tenants as get_tenants_data, get_mealactivity as get_mealactivity_data
+from app.business.definitions.read import (
+    get_tenants as get_tenants_data,
+    get_mealactivity as get_mealactivity_data
+)
 
 
 @strawberry.type

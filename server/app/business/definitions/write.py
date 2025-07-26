@@ -1,6 +1,8 @@
 from app.core.database import get_db_manager
 from app.config import DB_URL
+from app.logger import AppLogger
 
+logger = AppLogger().get_logger()
 
 async def add_new_tenant(
     id: str,
@@ -9,6 +11,7 @@ async def add_new_tenant(
     room_number: int,
     kyc: bool = False
 ):
+    logger.info(f"Adding new tenant: {id}, {name}, {email}, {room_number}, KYC: {kyc}")
     query = """
         INSERT INTO master.tenants_dim (id, name, email, room_number, kyc) VALUES (
             :id, :name, :email, :room_number, :kyc
@@ -34,11 +37,12 @@ async def add_new_tenant(
 
 async def add_new_mealactivity(
     tenant_id: str,
-    room_number: int,
     meal_type: str,
+    room_number: int | None = None,
     timestamp: float | None = None,
     rating: int | None = None
 ):
+    logger.info(f"Adding new meal activity for tenant {tenant_id}, room {room_number}, meal type {meal_type}, timestamp {timestamp}, rating {rating}")
     
     query = """
         INSERT INTO master.tenants_dim VALUES (

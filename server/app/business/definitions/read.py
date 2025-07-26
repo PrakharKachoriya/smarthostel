@@ -53,7 +53,11 @@ async def get_mealpending_data(meal_type: str, date: str = "CURRENT_DATE"):
         yield None
     
     
-async def get_floorwisecount_data(meal_type: str, floor_number: int, date: str = "CURRENT_DATE"):
+async def get_floorwisecount_data(
+    meal_type: str,
+    floor_number: int,
+    date: str = "CURRENT_DATE"
+):
     query = f"""
         WITH tenants AS (
             SELECT 
