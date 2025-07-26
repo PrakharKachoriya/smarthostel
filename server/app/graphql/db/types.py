@@ -22,10 +22,11 @@ class MealActivity:
 
 @strawberry.input
 class TenantInput:
-    id: int
+    id: str
     name: str
     email: str
     room_number: int
+    kyc: Optional[bool] = False
 
 
 @strawberry.input

@@ -45,7 +45,8 @@ async def get_mealpending_data(meal_type: str, date: str = "CURRENT_DATE"):
     
     db_manager = get_db_manager(DB_URL)
     try:
-        for row in await db_manager.execute(query, params):
+        rows = await db_manager.execute(query, params)
+        for row in rows:
             yield row
     except Exception as e:
         print(f"Error fetching meal pending data: {e}")
@@ -151,7 +152,8 @@ async def get_mealtime_data(meal_type:str, date: str = 'CURRENT_DATE'):
     
     db_manager = get_db_manager(DB_URL)
     try:
-        for row in await db_manager.execute(query, params):
+        rows = await db_manager.execute(query, params)
+        for row in rows:
             yield row
     except Exception as e:
         print(f"Error fetching meal time line chart data: {e}")
@@ -177,7 +179,8 @@ async def get_foodrating_data(meal_type: str, date: str = "CURRENT_DATE"):
     
     db_manager = get_db_manager(DB_URL)
     try:
-        for row in await db_manager.execute(query, params):
+        rows = await db_manager.execute(query, params)
+        for row in rows:
             yield row
     except Exception as e:
         print(f"Error fetching food rating data: {e}")

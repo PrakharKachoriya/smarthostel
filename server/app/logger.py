@@ -13,13 +13,13 @@ class AppLogger:
             cls._instance._setup_logger(name)
         return cls._instance
     
-    def get_logger(self, name: str) -> logging.Logger:
+    def get_logger(self, name: str = "app") -> logging.Logger:
         """Returns the logger instance."""
         if not hasattr(self, 'logger'):
             self._setup_logger(name)
         return self.logger
     
-    def _setup_logger(self, name: str) -> None:
+    def _setup_logger(self, name: str = "app") -> None:
         """Set up the logger with console and file handlers."""
         log_dir = Path("logs")
         log_dir.mkdir(parents=True, exist_ok=True)

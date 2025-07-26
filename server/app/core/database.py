@@ -4,15 +4,24 @@ from sqlalchemy import text
 from sqlalchemy.sql.elements import TextClause
 from typing import Optional, Union, Dict, Any, Sequence, Literal, AsyncGenerator
 from functools import lru_cache
+from app.logger import AppLogger
+
+logger = AppLogger().get_logger()
 
 class DBManager:
     def __init__(self, db_url: str) -> "DBManager":
+        logger.debug(f"Initializing DBManager with URL: {db_url}")
         self.db_url = db_url
         self._engine = None
     
     @property
     def engine(self) -> AsyncEngine:
         if self._engine is None:
+            logger.debug("Creating new AsyncEngine instance")
+            # Create the async engine with connection pooling
+            # Pool size is set to 20, with a maximum overflow of 10 connections
+            # Pool timeout is set to 30 seconds, and pool recycle is set to 1800 seconds
+            # This configuration is suitable for high concurrency applications
             self._engine = create_async_engine(
                 self.db_url,
                 echo=True,
@@ -40,12 +49,15 @@ class DBManager:
         Return: Query results based on fetch type.
         """
         
+        logger.debug(f"Executing SQL query: {sql_query} with params: {params} and fetch type: {fetch}")
         query = text(sql_query)
         
         if transactional:
+            logger.debug("Running query in a transactional context")
             async with self.engine.begin() as conn:
                 return await self._run(conn, query, params, fetch)
         else:
+            logger.debug("Running query in a non-transactional context")
             async with self.engine.connect() as conn:
                 return await self._run(conn, query, params, fetch)
     
@@ -63,9 +75,11 @@ class DBManager:
         Return: Executor for streaming results.
         """
         
+        logger.debug(f"Streaming SQL query: {sql_query} with params: {params}")
         query = text(sql_query)
         
         async with self.engine.connect() as conn:
+            logger.debug("Executing streaming query")
             result = await conn.execute(query, params or {})
             async for row in result:
                 yield dict(row._mapping)
@@ -75,11 +89,13 @@ class DBManager:
         sql_query: str,
     ) -> AsyncGenerator[Any, Any]:
         
+        logger.debug(f"Running DDL query: {sql_query}")
         query = text(sql_query)
         
         async with self.engine.begin() as conn:
             result = await conn.execute(query, {})
-            return None
+            logger.debug("DDL query executed successfully")
+            return result.rowcount
     
     async def _run(
         self,
@@ -98,16 +114,14 @@ class DBManager:
         Return: Query results based on fetch and stream type.
         """
         
+        
         result = await conn.execute(query, params or {})
-        print(result)
         
         if fetch == "one":
             row: Optional[Row] = result.fetchone()
             return dict(row._mapping) if row else {}
         elif fetch == "all":
             rows: Sequence[Row] = result.fetchall()
-            for row in rows:
-                print(row, row._mapping)
             return [dict(row._mapping) for row in rows]
         
         return None

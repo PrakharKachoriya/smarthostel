@@ -2,16 +2,23 @@ import asyncio
 from typing import Callable
 from abc import ABC, abstractmethod
 from functools import lru_cache
+from app.logger import AppLogger
+
+logger = AppLogger().get_logger()
 
 class TriggerQueue(ABC):
     def __init__(self):
+        logger.debug("Initializing TriggerQueue")
         self._queue = asyncio.Queue()
         self._shutdown = asyncio.Event()
     
     def is_off(self):
+        logger.debug("Checking if TriggerQueue is off")
         return self._shutdown.is_set()
     
     async def enqueue(self, payload: dict):
+        """Enqueue a payload to the trigger queue."""
+        logger.debug(f"Enqueuing payload: {payload}")
         if not self.is_off():
             await self._queue.put(payload)
     
@@ -30,17 +37,23 @@ class SingleWorkerTriggerQueue(TriggerQueue):
         self._worker = asyncio.Task | None = None
     
     def start(self, handler: Callable):
-        if not self._worker:
+        """Start the worker to process tasks from the queue."""
+        logger.debug("Starting SingleWorkerTriggerQueue worker")
+        if not self._worker or self._worker.done():
+            self._shutdown.clear()
+            logger.debug("Creating new worker task")
             self._worker = asyncio.create_task(self._run(handler))
     
     async def stop(self):
+        logger.debug("Stopping SingleWorkerTriggerQueue worker")
         self._shutdown.set()
         if self._worker:
+            logger.debug("Cancelling worker task")
             self._worker.cancel()
             try:
                 await self._worker
             except asyncio.CancelledError:
-                print("Worker Cancelled")
+                logger.error("Worker Cancelled")
                 
             self._worker = None
     
@@ -49,11 +62,13 @@ class SingleWorkerTriggerQueue(TriggerQueue):
             while not self.is_off():
                 task = asyncio.wait_for(self._queue.get(), timeout=1) # Fetch task with a timeout
                 try:
+                    task = await task
+                    logger.debug(f"Processing task: {task}")
                     await handler(task)
                 except asyncio.TimeoutError:
                     continue # Check for shutdown every second
         except asyncio.CancelledError:
-            print("TriggerQueue worker cancelled")
+            logger.error("TriggerQueue worker cancelled")
 
 
 class MultiWorkerTriggerQueue(TriggerQueue):

@@ -8,15 +8,14 @@ from app.business.ddl.methods import create_schema_if_not_exists, create_table_i
 @strawberry.type
 class Mutation:
     @strawberry.mutation
-    async def add_tenant(self, data: TenantInput, info: Info) -> list[Tenant]:
-        print(**data)
-        # add_new_tenant(**data)
-        
+    async def add_tenant(self, data: TenantInput, info: Info) -> None:
+        print(data.__dict__)
+        await add_new_tenant(**data.__dict__)
     
     @strawberry.mutation
-    async def add_mealactivity(self, data: MealActivityInput, info: Info) -> list[MealActivity]:
-        print(**data)
-        # add_new_mealactivity(**data)
+    async def add_mealactivity(self, data: MealActivityInput, info: Info) -> None:
+        print(data.__dict__)
+        await add_new_mealactivity(**data.__dict__)
     
     @strawberry.mutation
     async def create_schema(self, schema_name: str, info: Info) -> None:
