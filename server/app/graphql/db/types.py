@@ -1,6 +1,8 @@
 import strawberry
 from typing import Optional
 
+from datetime import datetime
+
 
 @strawberry.type
 class Tenant:
@@ -16,7 +18,7 @@ class MealActivity:
     tenant_id: str
     room_number: int
     meal_type: str
-    timestamp: float | None = None # Can be also managed in SQL as CURRENT_TIMESTAMP
+    timestamp: datetime | None = None # Can be also managed in SQL as CURRENT_TIMESTAMP
     rating: int | None = None # Rating is to be added later, defaulting to None
 
 
@@ -34,5 +36,5 @@ class MealActivityInput:
     tenant_id: str
     room_number: int
     meal_type: str
-    timestamp: float | None = None
+    timestamp: datetime | None = None
     rating: int | None = None
