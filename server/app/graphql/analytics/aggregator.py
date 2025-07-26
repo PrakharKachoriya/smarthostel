@@ -20,16 +20,19 @@ async def handle_trigger(payload: dict):
         logger.debug("Task 1 started")
         res = [{**row} async for row in get_tenants_data()]
         logger.debug(f"Task 1 completed with result: {res}")
+        await pubsub.publish(f"task_1_{payload["meal_type"]}", res)
     
     async def task_2():
         logger.debug("Task 2 started")
         res = [{**row} async for row in get_tenants_data()]
         logger.debug(f"Task 2 completed with result: {res}")
+        await pubsub.publish(f"task_2_{payload["meal_type"]}", res)
     
     async def task_3():
         logger.debug("Task 3 started")
         res = [{**row} async for row in get_tenants_data()]
         logger.debug(f"Task 3 completed with result: {res}")
+        await pubsub.publish(f"task_3_{payload["meal_type"]}", res)
     
     try:
         async with asyncio.TaskGroup() as tg:

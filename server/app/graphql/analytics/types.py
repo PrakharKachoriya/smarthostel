@@ -1,5 +1,7 @@
 import strawberry
 
+from app.graphql.db.types import Tenant
+
 @strawberry.type
 class MealPending_PieChart:
     title: list[str]
@@ -19,3 +21,8 @@ class FoodRating_LineChart:
 class FloorWiseCount_DoubleBarChart:
     floors: list[int]
     status_wise_counts: list[tuple[int, int]]
+
+
+@strawberry.type
+class Message:
+    message: list[Tenant]

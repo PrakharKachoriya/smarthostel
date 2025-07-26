@@ -12,3 +12,236 @@
 2025-07-26 14:17:57 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
 2025-07-26 14:17:57 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
 2025-07-26 14:17:57 | INFO | /app/app/graphql/analytics/aggregator.py:51 - lifespan() | Trigger queue started
+2025-07-26 14:29:55 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 14:29:55 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 14:29:55 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 14:29:55 | INFO | /app/app/graphql/analytics/aggregator.py:57 - lifespan() | Trigger queue stopped
+2025-07-26 14:29:55 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 14:29:55 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 14:29:55 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 14:29:55 | INFO | /app/app/graphql/analytics/aggregator.py:54 - lifespan() | Trigger queue started
+2025-07-26 14:30:15 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 1, room 101, meal type High-Tea, timestamp None, rating None
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '1', 'room_number': 101, 'meal_type': 'High-Tea'} and fetch type: none
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 14:30:15 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh'}
+2025-07-26 14:30:15 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh'}
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:17 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh'}
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:20 - task_1() | Task 1 started
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:26 - task_2() | Task 2 started
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_3() | Task 3 started
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 14:30:15 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task 1 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_1: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_1
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:28 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:34 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 14:30:15 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3
+2025-07-26 14:30:15 | DEBUG | /app/app/graphql/analytics/aggregator.py:42 - handle_trigger() | All tasks completed successfully
+2025-07-26 14:48:55 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 14:48:55 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 14:48:55 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 14:48:55 | INFO | /app/app/graphql/analytics/aggregator.py:60 - lifespan() | Trigger queue stopped
+2025-07-26 14:48:56 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 14:51:24 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 14:55:33 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 15:06:58 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 15:06:58 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 15:06:58 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 15:06:58 | INFO | /app/app/graphql/analytics/aggregator.py:54 - lifespan() | Trigger queue started
+2025-07-26 15:13:41 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 15:13:41 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 15:13:41 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 15:13:41 | INFO | /app/app/graphql/analytics/aggregator.py:60 - lifespan() | Trigger queue stopped
+2025-07-26 15:13:42 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 15:13:42 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 15:13:42 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 15:13:42 | INFO | /app/app/graphql/analytics/aggregator.py:54 - lifespan() | Trigger queue started
+2025-07-26 15:20:03 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 15:20:03 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 15:20:03 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 15:20:03 | INFO | /app/app/graphql/analytics/aggregator.py:60 - lifespan() | Trigger queue stopped
+2025-07-26 15:20:47 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 15:20:47 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 15:20:47 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 15:20:47 | INFO | /app/app/graphql/analytics/aggregator.py:54 - lifespan() | Trigger queue started
+2025-07-26 15:20:59 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:20:59 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: task_1_Dinner
+2025-07-26 15:20:59 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 15:21:38 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 1, room 101, meal type Dinner, timestamp None, rating None
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '1', 'room_number': 101, 'meal_type': 'Dinner'} and fetch type: none
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 15:21:38 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 15:21:38 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:17 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:20 - task_1() | Task 1 started
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:26 - task_2() | Task 2 started
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_3() | Task 3 started
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:21:38 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task 1 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_1_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 _getters[1]>]})
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic task_1_Dinner
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic task_1_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/subscriptions.py:56 - task_1_listener() | Received message for task 1: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:28 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Dinner
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:34 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 15:21:38 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Dinner
+2025-07-26 15:21:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:42 - handle_trigger() | All tasks completed successfully
+2025-07-26 15:21:58 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 2, room 101, meal type Dinner, timestamp None, rating None
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '2', 'room_number': 101, 'meal_type': 'Dinner'} and fetch type: none
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 15:21:58 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 15:21:58 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:17 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:20 - task_1() | Task 1 started
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:26 - task_2() | Task 2 started
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_3() | Task 3 started
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:21:58 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:34 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Dinner
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:28 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Dinner
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task 1 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_1_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic task_1_Dinner
+2025-07-26 15:21:58 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic task_1_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/subscriptions.py:56 - task_1_listener() | Received message for task 1: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:21:58 | DEBUG | /app/app/graphql/analytics/aggregator.py:42 - handle_trigger() | All tasks completed successfully
+2025-07-26 15:22:09 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:22:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 tasks=2>]})
+2025-07-26 15:22:09 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: task_1_Dinner
+2025-07-26 15:22:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': [<Queue at 0xffffa1717d70 maxsize=100 tasks=2>]})
+2025-07-26 15:22:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': []})
+2025-07-26 15:22:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_1_Dinner': []})
+2025-07-26 15:22:12 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:22:12 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: task_3_Breakfast
+2025-07-26 15:22:12 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 15:22:19 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 2, room 101, meal type Breakfast, timestamp None, rating None
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '2', 'room_number': 101, 'meal_type': 'Breakfast'} and fetch type: none
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 15:22:19 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Breakfast'}
+2025-07-26 15:22:19 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Breakfast'}
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:17 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Breakfast'}
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:20 - task_1() | Task 1 started
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:26 - task_2() | Task 2 started
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_3() | Task 3 started
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 15:22:19 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:34 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Breakfast: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': [<Queue at 0xffffa03ac830 maxsize=100 _getters[1]>]})
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic task_3_Breakfast
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic task_3_Breakfast: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/subscriptions.py:74 - task_3_listener() | Received message for task 3: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:28 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Breakfast: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': [<Queue at 0xffffa03ac830 maxsize=100 tasks=1>]})
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Breakfast
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task 1 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_1_Breakfast: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': [<Queue at 0xffffa03ac830 maxsize=100 tasks=1>]})
+2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_1_Breakfast
+2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:42 - handle_trigger() | All tasks completed successfully

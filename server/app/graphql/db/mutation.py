@@ -30,6 +30,7 @@ class Mutation:
             trigger_payload = {
                 "action": "meal_activity_added",
                 "pg_key": "slh",
+                "meal_type": data.meal_type
             }
             
             await trigger_queue.enqueue(trigger_payload)
