@@ -13,7 +13,7 @@ class TriggerQueue(ABC):
         self._shutdown = asyncio.Event()
     
     def is_off(self):
-        logger.debug("Checking if TriggerQueue is off")
+        # logger.debug("Checking if TriggerQueue is off")
         return self._shutdown.is_set()
     
     async def enqueue(self, payload: dict):

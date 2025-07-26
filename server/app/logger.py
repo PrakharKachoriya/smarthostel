@@ -33,7 +33,7 @@ class AppLogger:
         )
         
         # Avoid duplicate handlers
-        if self.logger.hasHandlers():
+        if not self.logger.hasHandlers():
             # Stream events to terminal
             stream_handler = logging.StreamHandler()
             stream_handler.setLevel(logging.DEBUG)
@@ -43,7 +43,7 @@ class AppLogger:
             file_handler = RotatingFileHandler(
                 log_dir / "app.log", maxBytes=5 * 1024 * 1024, backupCount=5
             )
-            file_handler.setLevel(logging.INFO)
+            file_handler.setLevel(logging.DEBUG)
             file_handler.setFormatter(formatter)
             
             # Add handlers to the logger

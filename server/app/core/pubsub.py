@@ -3,30 +3,56 @@ import asyncio
 from typing import Dict, List, Any, AsyncGenerator
 from collections import defaultdict
 
+from app.logger import AppLogger
+
+logger = AppLogger().get_logger()
+
 class PubSub:
     def __init__(self):
-        self._subscribers: Dict[str, List[asyncio.Queue]] = defaultdict(list)
-        self._lock = asyncio.Lock()
+        self._subscribers = None
+        self._lock = None
+    
+    @property
+    def subscribers(self):
+        """Get the current subscribers."""
+        if not self._subscribers:
+            self._subscribers: Dict[str, List[asyncio.Queue]] = defaultdict(list)
+        logger.debug(f"Current subscribers: {self._subscribers}")
+        return self._subscribers
+    
+    @property
+    def lock(self):
+        """Acquire a lock for thread-safe operations."""
+        logger.debug("Acquiring lock for PubSub operations")
+        if not self._lock:
+            self._lock = asyncio.Lock()
+        return self._lock
 
     async def subscribe(self, topic: str) -> AsyncGenerator[Any, None]:
         queue = asyncio.Queue(maxsize=100)  # Bounded queue to avoid memory leaks
-        async with self._lock:
-            self._subscribers[topic].append(queue)
+        async with self.lock:
+            logger.debug(f"Subscribing to topic: {topic}")
+            self.subscribers[topic].append(queue)
 
         try:
             while True:
                 message = await queue.get()
+                logger.debug(f"Received message on topic {topic}: {message}")
                 yield message
         finally:
-            async with self._lock:
-                if queue in self._subscribers[topic]:
-                    self._subscribers[topic].remove(queue)
-                    if not self._subscribers[topic]:
-                        del self._subscribers[topic]
+            async with self.lock:
+                if queue in self.subscribers[topic]:
+                    logger.debug(f"Unsubscribing from topic: {topic}")
+                    self.subscribers[topic].remove(queue)
+                    
+                    # if list is empty, delete the topic
+                    if not self.subscribers[topic]:
+                        del self.subscribers[topic]
 
     async def publish(self, topic: str, message: Any):
-        async with self._lock:
-            queues = list(self._subscribers.get(topic, []))  # shallow copy with queue references
+        async with self.lock:
+            logger.debug(f"Publishing message to topic {topic}: {message}")
+            queues = list(self.subscribers.get(topic, []))  # shallow copy with references
 
         # Send the message to all subscriber queues (do NOT lock this part)
         for queue in queues:
@@ -35,6 +61,7 @@ class PubSub:
             except asyncio.QueueFull:
                 # Optionally log or drop the message for slow subscribers
                 pass
+        logger.debug(f"Message published to {len(queues)} subscribers on topic {topic}")
 
 @lru_cache
 def get_pub_sub() -> PubSub:

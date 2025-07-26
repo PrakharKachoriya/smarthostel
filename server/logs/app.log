@@ -1,0 +1,14 @@
+2025-07-26 14:08:39 | INFO | /app/app/graphql/analytics/aggregator.py:51 - lifespan() | Trigger queue started
+2025-07-26 14:11:03 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 14:11:03 | INFO | /app/app/graphql/analytics/aggregator.py:57 - lifespan() | Trigger queue stopped
+2025-07-26 14:11:04 | INFO | /app/app/graphql/analytics/aggregator.py:51 - lifespan() | Trigger queue started
+2025-07-26 14:11:46 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 14:11:46 | INFO | /app/app/graphql/analytics/aggregator.py:57 - lifespan() | Trigger queue stopped
+2025-07-26 14:11:47 | INFO | /app/app/graphql/analytics/aggregator.py:51 - lifespan() | Trigger queue started
+2025-07-26 14:12:17 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 2, room 101, meal type High-Tea, timestamp None, rating None
+2025-07-26 14:17:56 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 14:17:56 | INFO | /app/app/graphql/analytics/aggregator.py:57 - lifespan() | Trigger queue stopped
+2025-07-26 14:17:56 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 14:17:57 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 14:17:57 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 14:17:57 | INFO | /app/app/graphql/analytics/aggregator.py:51 - lifespan() | Trigger queue started

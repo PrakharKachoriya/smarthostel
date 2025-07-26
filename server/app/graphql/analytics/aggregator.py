@@ -4,11 +4,13 @@ from contextlib import asynccontextmanager
 
 from app.business.definitions.read import get_tenants as get_tenants_data
 from app.core.trigger_queue import get_trigger_queue
+from app.core.pubsub import get_pub_sub
 from app.logger import AppLogger
 
 logger = AppLogger().get_logger()
 
 trigger_queue = get_trigger_queue()
+pubsub = get_pub_sub()
 
 async def handle_trigger(payload: dict):
     """Handle the trigger payload."""
