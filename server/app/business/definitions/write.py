@@ -46,14 +46,14 @@ async def add_new_mealactivity(
         )
     """
     params = {
-        tenant_id: tenant_id,
-        room_number: room_number,
-        meal_type: meal_type,
+        "tenant_id": tenant_id,
+        "room_number": room_number,
+        "meal_type": meal_type,
     }
     
     db_manager = get_db_manager(DB_URL)
     try:
-        result = await db_manager.execute(query, params, transactional=True)
+        result = await db_manager.execute(query, params, fetch="none", transactional=True)
         return result
     except Exception as e:
         print(f"Error printing all tenants {e}")
