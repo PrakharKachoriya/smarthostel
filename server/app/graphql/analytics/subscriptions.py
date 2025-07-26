@@ -16,12 +16,16 @@ logger = AppLogger().get_logger()
 @strawberry.type
 class Subscription:
     @strawberry.subscription
-    async def pending_piechart(self, meal_type: str) -> AsyncGenerator[MealPending_PieChart, None]:
+    async def pending_piechart(
+        self,
+        pg_key: str,
+        meal_type: str
+    ) -> AsyncGenerator[list[MealPending_PieChart], None]:
         """Subscribe to pie chart."""
         
         pubsub = get_pub_sub()
-        async for message in pubsub.subscribe(f"mealpending_piechart_{meal_type}"):
-            yield MealPending_PieChart(**message)
+        async for message in pubsub.subscribe(f"{pg_key}_mealpending_piechart_{meal_type}"):
+            yield [MealPending_PieChart(**data) for data in message]
     
     @strawberry.subscription
     async def floorwisecount_barchart(self, meal_type: str, floor: int) -> AsyncGenerator[FloorWiseCount_DoubleBarChart, None]:

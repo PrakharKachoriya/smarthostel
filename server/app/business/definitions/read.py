@@ -1,8 +1,10 @@
+from datetime import date
+
 from app.core.database import get_db_manager
 from app.config import DB_URL
 
 
-async def get_mealpending_data(meal_type: str, date: str = "CURRENT_DATE"):
+async def get_mealpending_data(meal_type: str, date: date = date.today()):
     query = """
         WITH tenants AS (
             SELECT id AS tenant_id
@@ -31,11 +33,21 @@ async def get_mealpending_data(meal_type: str, date: str = "CURRENT_DATE"):
             ON t.tenant_id = m.tenant_id
         )
         
+        , status_counts AS (
+            SELECT
+                status,
+                COUNT(*) AS value_counts
+            FROM combined
+            GROUP BY status
+        )
+        
         SELECT
-            status
-            , COUNT(tenant_id) AS value_counts
-        FROM combined
-        GROUP BY status
+            s.status AS status,
+            COALESCE(sc.value_counts, 0) AS value_counts
+        FROM (VALUES ('served'), ('pending')) AS s(status)
+        LEFT JOIN status_counts sc ON (
+            sc.status = s.status
+        )
     """
     
     params = {

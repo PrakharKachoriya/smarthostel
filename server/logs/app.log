@@ -245,3 +245,891 @@
 2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': [<Queue at 0xffffa03ac830 maxsize=100 tasks=1>]})
 2025-07-26 15:22:19 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_1_Breakfast
 2025-07-26 15:22:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:42 - handle_trigger() | All tasks completed successfully
+2025-07-26 15:24:42 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 15:24:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': [<Queue at 0xffffa03ac830 maxsize=100 tasks=1>]})
+2025-07-26 15:24:42 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: task_3_Breakfast
+2025-07-26 15:24:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': [<Queue at 0xffffa03ac830 maxsize=100 tasks=1>]})
+2025-07-26 15:24:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': []})
+2025-07-26 15:24:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'task_3_Breakfast': []})
+2025-07-26 16:35:46 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 16:35:46 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 16:35:46 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 16:35:46 | INFO | /app/app/graphql/analytics/aggregator.py:60 - lifespan() | Trigger queue stopped
+2025-07-26 16:35:47 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 16:35:47 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 16:35:47 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 16:35:47 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-26 16:38:31 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 16:38:31 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM analytics.meal_activity_fact
+     with params: None and fetch type: all
+2025-07-26 16:38:31 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:38:31 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 16:38:40 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM analytics.meal_activity_fact
+     with params: None and fetch type: all
+2025-07-26 16:38:40 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:40:55 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:40:55 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:41:09 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM analytics.meal_activity_fact
+     with params: None and fetch type: all
+2025-07-26 16:41:09 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:43:38 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 1, room 101, meal type Dinner, timestamp None, rating None
+2025-07-26 16:43:38 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '1', 'room_number': 101, 'meal_type': 'Dinner'} and fetch type: none
+2025-07-26 16:43:38 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 16:43:38 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 16:43:38 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Dinner
+2025-07-26 16:43:38 | ERROR | /app/app/graphql/analytics/aggregator.py:30 - task_1() | Error fetching meal pending data: get_mealpending_data() missing 1 required positional argument: 'meal_type'
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: []
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Dinner: []
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic slh_mealpending_piechart_Dinner
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 16:43:38 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:43:38 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 16:43:38 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:43:38 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Dinner
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 16:43:38 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Dinner
+2025-07-26 16:43:38 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 16:44:22 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM analytics.meal_activity_fact
+     with params: None and fetch type: all
+2025-07-26 16:44:22 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:47:05 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:47:05 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:47:56 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 16:47:56 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 16:47:56 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 16:47:56 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-26 16:47:57 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 16:47:57 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 16:47:57 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 16:47:57 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-26 16:50:47 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:50:47 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 16:50:47 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 16:50:54 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 3, room 101, meal type Lunch, timestamp None, rating None
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '3', 'room_number': 101, 'meal_type': 'Lunch'} and fetch type: none
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 16:50:54 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 16:50:54 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Lunch
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        SELECT
+            status
+            , COUNT(tenant_id) AS value_counts
+        FROM combined
+        GROUP BY status
+     with params: {'meal_type': 'Lunch', 'date': 'CURRENT_DATE'} and fetch type: all
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:50:54 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:50:54 | ERROR | /app/app/graphql/analytics/aggregator.py:30 - task_1() | Error fetching meal pending data: 'NoneType' object is not subscriptable
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: []
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Lunch: []
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff9e01deb0 maxsize=100 _getters[1]>]})
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic slh_mealpending_piechart_Lunch
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic slh_mealpending_piechart_Lunch: []
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff9e01deb0 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Lunch
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff9e01deb0 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 16:50:54 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Lunch
+2025-07-26 16:50:54 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 16:54:25 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:54:25 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff9e01deb0 maxsize=100 tasks=1>]})
+2025-07-26 16:54:25 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 16:54:25 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff9e01deb0 maxsize=100 tasks=1>]})
+2025-07-26 16:54:25 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 16:54:25 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 16:54:25 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 16:54:25 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 16:54:25 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 16:54:25 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-26 16:54:26 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 16:54:26 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 16:54:26 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 16:54:26 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-26 16:54:27 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:54:27 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 16:54:27 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 16:54:57 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:54:57 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffab8d7b30 maxsize=100>]})
+2025-07-26 16:54:57 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 16:54:57 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffab8d7b30 maxsize=100>]})
+2025-07-26 16:54:57 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 16:54:57 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 16:55:03 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:55:03 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 16:55:03 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 16:55:28 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 4, room 101, meal type Lunch, timestamp None, rating None
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '4', 'room_number': 101, 'meal_type': 'Lunch'} and fetch type: none
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 16:55:28 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 16:55:28 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 16:55:28 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 16:55:28 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Lunch
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        SELECT
+            status
+            , COUNT(tenant_id) AS value_counts
+        FROM combined
+        GROUP BY status
+     with params: {'meal_type': 'Lunch', 'date': datetime.date(2025, 7, 26)} and fetch type: all
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:55:28 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:55:28 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 16:55:28 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 16:55:28 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: [{'x': 'served', 'y': 2}]
+2025-07-26 16:55:28 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:55:28 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Lunch: [{'x': 'served', 'y': 2}]
+2025-07-26 16:55:28 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffab91fe00 maxsize=100 _getters[1]>]})
+2025-07-26 16:55:28 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic slh_mealpending_piechart_Lunch
+2025-07-26 16:55:28 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic slh_mealpending_piechart_Lunch: [{'x': 'served', 'y': 2}]
+2025-07-26 16:55:29 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffab91fe00 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Lunch
+2025-07-26 16:55:29 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffab91fe00 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 16:55:29 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Lunch
+2025-07-26 16:55:29 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 17:02:07 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:02:07 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffab91fe00 maxsize=100 tasks=1>]})
+2025-07-26 17:02:07 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:02:07 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffab91fe00 maxsize=100 tasks=1>]})
+2025-07-26 17:02:07 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:02:07 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:02:07 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 17:02:07 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 17:02:07 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 17:02:07 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-26 17:02:08 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 17:02:08 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 17:02:08 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 17:02:08 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-26 17:02:10 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:02:10 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:02:10 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 17:02:15 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:02:15 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb4ecfc50 maxsize=100>]})
+2025-07-26 17:02:15 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:02:15 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb4ecfc50 maxsize=100>]})
+2025-07-26 17:02:15 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:02:15 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:03:20 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:03:20 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:03:20 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 17:03:30 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 5, room 101, meal type Lunch, timestamp None, rating None
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '5', 'room_number': 101, 'meal_type': 'Lunch'} and fetch type: none
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 17:03:30 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:03:30 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Lunch
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        status_counts AS (
+            SELECT
+                status,
+                COUNT(*) AS value_counts
+            FROM combined
+            GROUP BY status
+        )
+        
+        SELECT
+            s.status AS status,
+            COALESCE(sc.value_counts, 0) AS value_counts
+        FROM (VALUES ('served'), ('pending')) AS s
+        LEFT JOIN status_counts sc ON (
+            sc.status = s.status
+        )
+     with params: {'meal_type': 'Lunch', 'date': datetime.date(2025, 7, 26)} and fetch type: all
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:03:30 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:03:30 | ERROR | /app/app/graphql/analytics/aggregator.py:30 - task_1() | Error fetching meal pending data: 'NoneType' object is not subscriptable
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: []
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Lunch: []
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb4f1d6d0 maxsize=100 _getters[1]>]})
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic slh_mealpending_piechart_Lunch
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic slh_mealpending_piechart_Lunch: []
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb4f1d6d0 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Lunch
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb4f1d6d0 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:03:30 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Lunch
+2025-07-26 17:03:30 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 17:06:29 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:06:29 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb4f1d6d0 maxsize=100 tasks=1>]})
+2025-07-26 17:06:29 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:06:29 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb4f1d6d0 maxsize=100 tasks=1>]})
+2025-07-26 17:06:29 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:06:29 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:06:30 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 17:06:30 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 17:06:30 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 17:06:30 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-26 17:06:30 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 17:06:30 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 17:06:30 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 17:06:30 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-26 17:06:32 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:06:32 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:06:32 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 17:06:48 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:06:48 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb57b42f0 maxsize=100>]})
+2025-07-26 17:06:48 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:06:48 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb57b42f0 maxsize=100>]})
+2025-07-26 17:06:48 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:06:48 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:06:58 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:06:58 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:06:58 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 17:07:09 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 6, room 101, meal type Lunch, timestamp None, rating None
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '6', 'room_number': 101, 'meal_type': 'Lunch'} and fetch type: none
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 17:07:09 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:07:09 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Lunch
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        status_counts AS (
+            SELECT
+                status,
+                COUNT(*) AS value_counts
+            FROM combined
+            GROUP BY status
+        )
+        
+        SELECT
+            s.status AS status,
+            COALESCE(sc.value_counts, 0) AS value_counts
+        FROM (VALUES ('served'), ('pending')) AS s(status)
+        LEFT JOIN status_counts sc ON (
+            sc.status = s.status
+        )
+     with params: {'meal_type': 'Lunch', 'date': datetime.date(2025, 7, 26)} and fetch type: all
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:07:09 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:07:09 | ERROR | /app/app/graphql/analytics/aggregator.py:30 - task_1() | Error fetching meal pending data: 'NoneType' object is not subscriptable
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: []
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Lunch: []
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb5cb0200 maxsize=100 _getters[1]>]})
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic slh_mealpending_piechart_Lunch
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic slh_mealpending_piechart_Lunch: []
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb5cb0200 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Lunch
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb5cb0200 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:07:09 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Lunch
+2025-07-26 17:07:09 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 17:08:26 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:08:26 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb5cb0200 maxsize=100 tasks=1>]})
+2025-07-26 17:08:26 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:08:26 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffffb5cb0200 maxsize=100 tasks=1>]})
+2025-07-26 17:08:26 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:08:26 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:08:27 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-26 17:08:27 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-26 17:08:27 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-26 17:08:27 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-26 17:08:27 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-26 17:08:28 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-26 17:08:28 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-26 17:08:28 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-26 17:08:29 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:08:29 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:08:29 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 17:08:42 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:08:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff842d3fe0 maxsize=100>]})
+2025-07-26 17:08:42 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:08:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff842d3fe0 maxsize=100>]})
+2025-07-26 17:08:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:08:42 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:08:49 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:08:49 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:08:49 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 17:09:03 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 7, room 101, meal type Lunch, timestamp None, rating None
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '7', 'room_number': 101, 'meal_type': 'Lunch'} and fetch type: none
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-26 17:09:03 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:09:03 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Lunch
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        , status_counts AS (
+            SELECT
+                status,
+                COUNT(*) AS value_counts
+            FROM combined
+            GROUP BY status
+        )
+        
+        SELECT
+            s.status AS status,
+            COALESCE(sc.value_counts, 0) AS value_counts
+        FROM (VALUES ('served'), ('pending')) AS s(status)
+        LEFT JOIN status_counts sc ON (
+            sc.status = s.status
+        )
+     with params: {'meal_type': 'Lunch', 'date': datetime.date(2025, 7, 26)} and fetch type: all
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:03 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: [{'x': 'served', 'y': 2}, {'x': 'pending', 'y': 0}]
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Lunch: [{'x': 'served', 'y': 2}, {'x': 'pending', 'y': 0}]
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff842d3e60 maxsize=100 _getters[1]>]})
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic slh_mealpending_piechart_Lunch
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic slh_mealpending_piechart_Lunch: [{'x': 'served', 'y': 2}, {'x': 'pending', 'y': 0}]
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff842d3e60 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Lunch
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff842d3e60 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:09:03 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Lunch
+2025-07-26 17:09:03 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 17:09:09 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff842d3e60 maxsize=100 tasks=1>]})
+2025-07-26 17:09:09 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Lunch
+2025-07-26 17:09:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': [<Queue at 0xffff842d3e60 maxsize=100 tasks=1>]})
+2025-07-26 17:09:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:09:09 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Lunch': []})
+2025-07-26 17:09:11 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:11 | DEBUG | /app/app/core/pubsub.py:34 - subscribe() | Subscribing to topic: slh_mealpending_piechart_Dinner
+2025-07-26 17:09:11 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {})
+2025-07-26 17:09:19 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 9, room 101, meal type Lunch, timestamp None, rating None
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '9', 'room_number': 101, 'meal_type': 'Lunch'} and fetch type: none
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 17:09:19 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:09:19 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Lunch'}
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Lunch
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        , status_counts AS (
+            SELECT
+                status,
+                COUNT(*) AS value_counts
+            FROM combined
+            GROUP BY status
+        )
+        
+        SELECT
+            s.status AS status,
+            COALESCE(sc.value_counts, 0) AS value_counts
+        FROM (VALUES ('served'), ('pending')) AS s(status)
+        LEFT JOIN status_counts sc ON (
+            sc.status = s.status
+        )
+     with params: {'meal_type': 'Lunch', 'date': datetime.date(2025, 7, 26)} and fetch type: all
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:19 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1]>]})
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Lunch
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Lunch: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1]>]})
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Lunch
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: [{'x': 'served', 'y': 2}, {'x': 'pending', 'y': 0}]
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Lunch: [{'x': 'served', 'y': 2}, {'x': 'pending', 'y': 0}]
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1]>]})
+2025-07-26 17:09:19 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic slh_mealpending_piechart_Lunch
+2025-07-26 17:09:19 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 17:09:39 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 11, room 101, meal type Dinner, timestamp None, rating None
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '11', 'room_number': 101, 'meal_type': 'Dinner'} and fetch type: none
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 17:09:39 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 17:09:39 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Dinner
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        , status_counts AS (
+            SELECT
+                status,
+                COUNT(*) AS value_counts
+            FROM combined
+            GROUP BY status
+        )
+        
+        SELECT
+            s.status AS status,
+            COALESCE(sc.value_counts, 0) AS value_counts
+        FROM (VALUES ('served'), ('pending')) AS s(status)
+        LEFT JOIN status_counts sc ON (
+            sc.status = s.status
+        )
+     with params: {'meal_type': 'Dinner', 'date': datetime.date(2025, 7, 26)} and fetch type: all
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:39 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1]>]})
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Dinner
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1]>]})
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Dinner
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: [{'x': 'served', 'y': 0}, {'x': 'pending', 'y': 2}]
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Dinner: [{'x': 'served', 'y': 0}, {'x': 'pending', 'y': 2}]
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1]>]})
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic slh_mealpending_piechart_Dinner
+2025-07-26 17:09:39 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic slh_mealpending_piechart_Dinner: [{'x': 'served', 'y': 0}, {'x': 'pending', 'y': 2}]
+2025-07-26 17:09:39 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 17:09:43 | INFO | /app/app/business/definitions/write.py:45 - add_new_mealactivity() | Adding new meal activity for tenant 11, room 101, meal type Dinner, timestamp None, rating None
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
+        )
+     with params: {'tenant_id': '11', 'room_number': 101, 'meal_type': 'Dinner'} and fetch type: none
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-26 17:09:43 | DEBUG | /app/app/core/trigger_queue.py:21 - enqueue() | Enqueuing payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 17:09:43 | DEBUG | /app/app/core/trigger_queue.py:66 - _run() | Processing task: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:18 - handle_trigger() | Handling trigger payload: {'action': 'meal_activity_added', 'pg_key': 'slh', 'meal_type': 'Dinner'}
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:22 - task_1() | Task started for slh_mealpending_piechart_Dinner
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        WITH tenants AS (
+            SELECT id AS tenant_id
+            FROM master.tenants_dim
+        )
+        
+        , meal_activity AS (
+            SELECT tenant_id
+            FROM analytics.meal_activity_fact
+            WHERE meal_type = :meal_type AND timestamp::date = :date
+        )
+        
+        , combined AS (
+            SELECT
+                t.tenant_id
+                , m.tenant_id AS meal_tenant_id
+                , (
+                    CASE
+                    WHEN m.tenant_id IS NULL
+                        THEN 'pending'
+                    ELSE 'served'
+                    END
+                ) AS status
+            FROM tenants t
+            LEFT JOIN meal_activity m
+            ON t.tenant_id = m.tenant_id
+        )
+        
+        , status_counts AS (
+            SELECT
+                status,
+                COUNT(*) AS value_counts
+            FROM combined
+            GROUP BY status
+        )
+        
+        SELECT
+            s.status AS status,
+            COALESCE(sc.value_counts, 0) AS value_counts
+        FROM (VALUES ('served'), ('pending')) AS s(status)
+        LEFT JOIN status_counts sc ON (
+            sc.status = s.status
+        )
+     with params: {'meal_type': 'Dinner', 'date': datetime.date(2025, 7, 26)} and fetch type: all
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:39 - task_2() | Task 2 started
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:45 - task_3() | Task 3 started
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM master.tenants_dim
+     with params: None and fetch type: all
+2025-07-26 17:09:43 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:47 - task_3() | Task 3 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_3_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_3_Dinner
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:41 - task_2() | Task 2 completed with result: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic task_2_Dinner: [{'id': '1', 'name': 'Test', 'email': 'Test@email.com', 'room_number': 101, 'kyc': False}, {'id': '2', 'name': 'Test2', 'email': 'Test2@email.com', 'room_number': 101, 'kyc': False}]
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 0 subscribers on topic task_2_Dinner
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:32 - task_1() | Task meal pending pie chart completed with result: [{'x': 'served', 'y': 0}, {'x': 'pending', 'y': 2}]
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:54 - publish() | Publishing message to topic slh_mealpending_piechart_Dinner: [{'x': 'served', 'y': 0}, {'x': 'pending', 'y': 2}]
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 _getters[1] tasks=1>]})
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:64 - publish() | Message published to 1 subscribers on topic slh_mealpending_piechart_Dinner
+2025-07-26 17:09:43 | DEBUG | /app/app/core/pubsub.py:40 - subscribe() | Received message on topic slh_mealpending_piechart_Dinner: [{'x': 'served', 'y': 0}, {'x': 'pending', 'y': 2}]
+2025-07-26 17:09:43 | DEBUG | /app/app/graphql/analytics/aggregator.py:55 - handle_trigger() | All tasks completed successfully
+2025-07-26 17:09:51 | DEBUG | /app/app/core/pubsub.py:26 - lock() | Acquiring lock for PubSub operations
+2025-07-26 17:09:51 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 tasks=2>]})
+2025-07-26 17:09:51 | DEBUG | /app/app/core/pubsub.py:45 - subscribe() | Unsubscribing from topic: slh_mealpending_piechart_Dinner
+2025-07-26 17:09:51 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': [<Queue at 0xffff8431f590 maxsize=100 tasks=2>]})
+2025-07-26 17:09:51 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': []})
+2025-07-26 17:09:51 | DEBUG | /app/app/core/pubsub.py:20 - subscribers() | Current subscribers: defaultdict(<class 'list'>, {'slh_mealpending_piechart_Dinner': []})
