@@ -45,8 +45,8 @@ async def add_new_mealactivity(
     logger.info(f"Adding new meal activity for tenant {tenant_id}, room {room_number}, meal type {meal_type}, timestamp {timestamp}, rating {rating}")
     
     query = """
-        INSERT INTO master.tenants_dim VALUES (
-            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP(), NULL
+        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
+            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
         )
     """
     params = {

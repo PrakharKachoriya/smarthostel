@@ -15,6 +15,7 @@ services:
       - "8000:8000"
     volumes:
       - ./server:/app
+
     environment:
       DB_HOST: db
       DB_PORT: 5432

@@ -31,7 +31,7 @@ class TenantInput:
 
 @strawberry.input
 class MealActivityInput:
-    tenant_id: int
+    tenant_id: str
     room_number: int
     meal_type: str
     timestamp: float | None = None

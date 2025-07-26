@@ -34,7 +34,7 @@ class TriggerQueue(ABC):
 class SingleWorkerTriggerQueue(TriggerQueue):
     def __init__(self):
         super().__init__()
-        self._worker = asyncio.Task | None = None
+        self._worker: asyncio.Task | None = None
     
     def start(self, handler: Callable):
         """Start the worker to process tasks from the queue."""
