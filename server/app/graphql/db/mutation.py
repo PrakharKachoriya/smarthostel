@@ -1,6 +1,6 @@
 import strawberry
 from strawberry.types import Info
-from app.graphql.db.types import Tenant, MealActivity, TenantInput, MealActivityInput
+from app.graphql.db.types import TenantInput, MealActivityInput
 from app.business.definitions.write import add_new_tenant, add_new_mealactivity
 from app.business.ddl.methods import create_schema_if_not_exists, create_table_if_not_exists
 
@@ -9,12 +9,12 @@ from app.business.ddl.methods import create_schema_if_not_exists, create_table_i
 class Mutation:
     @strawberry.mutation
     async def add_tenant(self, data: TenantInput, info: Info) -> None:
-        print(data.__dict__)
+        # print(data.__dict__)
         await add_new_tenant(**data.__dict__)
     
     @strawberry.mutation
     async def add_mealactivity(self, data: MealActivityInput, info: Info) -> None:
-        print(data.__dict__)
+        # print(data.__dict__)
         await add_new_mealactivity(**data.__dict__)
     
     @strawberry.mutation

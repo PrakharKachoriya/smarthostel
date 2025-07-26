@@ -13,11 +13,11 @@ class Tenant:
 
 @strawberry.type
 class MealActivity:
-    tenant_id: int
+    tenant_id: str
     room_number: int
     meal_type: str
-    timestamp: float | None = None
-    rating: int | None = None
+    timestamp: float | None = None # Can be also managed in SQL as CURRENT_TIMESTAMP
+    rating: int | None = None # Rating is to be added later, defaulting to None
 
 
 @strawberry.input
@@ -34,5 +34,5 @@ class MealActivityInput:
     tenant_id: int
     room_number: int
     meal_type: str
-    timestamp: Optional[float | None] = None
-    rating: Optional[int] = 3
+    timestamp: float | None = None
+    rating: int | None = None
