@@ -10,7 +10,7 @@ from app.logger import AppLogger
 
 logger = AppLogger().get_logger()
 
-trigger_queue = get_trigger_queue()
+trigger_queue = get_trigger_queue(queue_type="multi")
 pubsub = get_pub_sub()
 
 async def handle_trigger(payload: dict):

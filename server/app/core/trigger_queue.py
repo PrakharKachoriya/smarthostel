@@ -72,60 +72,63 @@ class SingleWorkerTriggerQueue(TriggerQueue):
 
 
 class MultiWorkerTriggerQueue(TriggerQueue):
-    def __init__(
-        self,
-        concurrency: int = 4,
-        max_retries: int = 3,
-        retry_delay: float = 1.0
-    ):
+    def __init__(self, worker_count: int = 4, max_retries: int = 3, backoff_base: float = 0.5):
         super().__init__()
-        self._concurrency = concurrency
+        logger.debug(f"Initializing MultiWorkerTriggerQueue with {worker_count} workers")
+        self._workers: list[asyncio.Task] = []
+        self._worker_count = worker_count
         self._max_retries = max_retries
-        self._retry_delay = retry_delay
-        self._workers = list[asyncio.Task] = []
-    
+        self._backoff_base = backoff_base
+
     def start(self, handler: Callable):
-        for _ in range(self._concurrency):
-            worker = asyncio.create_task(self._worker_loop(handler, _+1))
-            self._workers.append(worker)
-    
+        logger.debug(f"Starting {self._worker_count} workers")
+        self._shutdown.clear()
+
+        for worker_id in range(self._worker_count):
+            task = asyncio.create_task(self._run(handler, worker_id))
+            self._workers.append(task)
+
     async def stop(self):
+        logger.debug("Stopping all workers")
         self._shutdown.set()
-        for worker in self._workers:
-            worker.cancel()
+
+        for task in self._workers:
+            task.cancel()
+
+        for task in self._workers:
             try:
-                await worker
+                await task
             except asyncio.CancelledError:
-                print(f"Worker Cancelled")
-            
-            worker = None
-    
-    async def _worker_loop(self, handler: Callable, worker_id: int):
-        while not self.is_off():
-            task = asyncio.wait_for(self._queue.get(), timeout=1) # Fetch task with a timeout
+                logger.debug("Worker cancelled")
+
+        self._workers = []
+
+    async def _run(self, handler: Callable, worker_id: int):
+        logger.debug(f"Worker-{worker_id} started")
+        try:
+            while not self.is_off():
+                task = await self._queue.get()
+                await self._handle_with_retry(handler, task, worker_id)
+        except asyncio.CancelledError:
+            logger.debug(f"Worker-{worker_id} cancelled")
+        finally:
+            logger.debug(f"Worker-{worker_id} stopped")
+
+    async def _handle_with_retry(self, handler: Callable, task: dict, worker_id: int):
+        attempt = 0
+        while attempt <= self._max_retries:
             try:
-                await self._process_with_retries(task, handler, worker_id)
-            except asyncio.TimeoutError:
-                continue # Check for shutdown every second
-            except asyncio.CancelledError:
-                print("MultiWorkerTriggerQueue worker cancelled")
-    
-    async def _process_with_retries(
-        self,
-        task: dict,
-        handler: Callable,
-        worker_id: int
-    ):
-        for attempt in range(1, self._max_retries + 2):
-            try:
+                logger.debug(f"Worker-{worker_id} attempt {attempt+1} for task: {task}")
                 await handler(task)
-                return
+                return  # success
             except Exception as e:
-                print(f"Worker {worker_id} failed to process task {task} on attempt {attempt}: {e}")
+                attempt += 1
+                logger.warning(f"Worker-{worker_id} failed on attempt {attempt} with error: {e}")
                 if attempt > self._max_retries:
-                    print(f"Worker {worker_id} giving up on task {task} after {self._max_retries} retries")
-                    break
-                await asyncio.sleep(self._retry_delay * attempt)
+                    logger.error(f"Worker-{worker_id} permanently failed task after {attempt} attempts: {task}")
+                    return
+                backoff_time = self._backoff_base * (2 ** (attempt - 1))
+                await asyncio.sleep(backoff_time)
 
 
 @lru_cache
