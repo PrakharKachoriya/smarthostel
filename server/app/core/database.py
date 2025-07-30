@@ -25,9 +25,9 @@ class DBManager:
             self._engine = create_async_engine(
                 self.db_url,
                 echo=True,
-                pool_size=20,
-                max_overflow=10,
-                pool_timeout=30,
+                pool_size=1000,
+                max_overflow=200,
+                pool_timeout=10,
                 pool_recycle=1800
             )
         return self._engine
