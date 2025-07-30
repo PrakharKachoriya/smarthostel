@@ -1455,3 +1455,17 @@
 2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
 2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:92 - run_ddl() | Running DDL query: CREATE SCHEMA IF NOT EXISTS "laundry";
 2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
+2025-07-30 01:23:03 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 01:23:03 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 01:23:03 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 01:23:03 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 01:23:04 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 01:23:04 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 01:23:04 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 01:23:04 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 01:27:40 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-30 01:27:40 | DEBUG | /app/app/core/database.py:92 - run_ddl() | Running DDL query: CREATE TABLE IF NOT EXISTS "core"."pg" (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, password TEXT NOT NULL, phone_number TEXT, address TEXT, city TEXT, state TEXT, postal_code TEXT, created_at TIMESTAMP DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Kolkata'));
+2025-07-30 01:27:40 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-30 01:27:41 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
+2025-07-30 01:34:27 | DEBUG | /app/app/core/database.py:92 - run_ddl() | Running DDL query: CREATE TABLE IF NOT EXISTS "core"."tenant" (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), pg_id UUID REFERENCES core.pg(id) ON DELETE CASCADE, password TEXT NOT NULL, name TEXT NOT NULL, email TEXT, phone_number TEXT, room_number INTEGER, join_date DATE DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Kolkata')::DATE, created_at TIMESTAMP DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Kolkata'));
+2025-07-30 01:34:27 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully

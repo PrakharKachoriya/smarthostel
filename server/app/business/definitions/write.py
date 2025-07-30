@@ -1,37 +1,44 @@
 from app.core.database import get_db_manager
+from app.core.utils import get_sql_insert_query_params
 from app.config import DB_URL
 from app.logger import AppLogger
+from app.business.definitions.types import CreateTenant
 
 logger = AppLogger().get_logger()
 
 async def add_new_tenant(
-    id: str,
-    name: str,
-    email: str,
-    room_number: int,
-    kyc: bool = False
+    data: CreateTenant,
+    pg_id: str
 ):
-    logger.info(f"Adding new tenant: {id}, {name}, {email}, {room_number}, KYC: {kyc}")
-    query = """
-        INSERT INTO master.tenants_dim (id, name, email, room_number, kyc) VALUES (
-            :id, :name, :email, :room_number, :kyc
-        )
-    """
-    params = {
-        "id": id,
-        "name": name,
-        "email": email,
-        "room_number": room_number,
-        "kyc": kyc
-    }
+    # query = """
+    #     INSERT INTO core.tenants (pg_id, name, email, phone_number, room_number, join_date) VALUES (
+    #         :pg_id, :name, :email, :phone_number, :room_number, COALESCE(:join_date, CURRENT_DATE)
+    #     )
+    # """
+    # params = {
+    #     "pg_id": pg_id,
+    #     "name": name,
+    #     "email": email,
+    #     "phone_number": phone_number,
+    #     "room_number": room_number,
+    #     "join_date": join_date
+    # }
+    
+    query, params = get_sql_insert_query_params(
+        schema="core",
+        table="tenants",
+        obj=data.model_dump()
+    )
+    params["pd_id"] = pg_id
+    logger.info(f"Adding to pg {params["pd_id"]} - tenant data: {params}")
     
     db_manager = get_db_manager(DB_URL)
     
     try:
-        result = await db_manager.execute(query, params, fetch="none", transactional=True)
+        result = await db_manager.execute(query, params, fetch="one", transactional=True)
         return result
     except Exception as e:
-        print(f"Error printing all tenants {e}")
+        print(f"Error adding new tenant: {e}")
         return None
 
 
