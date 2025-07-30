@@ -1,0 +1,9 @@
+services:
+  db:
+    container_name: smartpg_db_dev
+    environment:
+      POSTGRES_USER: batlahouse
+      POSTGRES_PASSWORD: wandervibez
+      POSTGRES_DB: smartpg
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data

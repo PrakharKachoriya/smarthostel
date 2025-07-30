@@ -1434,3 +1434,24 @@
 2025-07-26 18:33:21 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
 2025-07-26 18:33:21 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
 2025-07-26 18:33:21 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-29 23:03:36 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-29 23:05:31 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-29 23:05:31 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-29 23:05:31 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-29 23:05:31 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-29 23:24:46 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-29 23:24:46 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-29 23:24:46 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-29 23:24:46 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-29 23:24:47 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-29 23:24:47 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-29 23:24:47 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-29 23:24:47 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:92 - run_ddl() | Running DDL query: CREATE SCHEMA IF NOT EXISTS "core";
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:92 - run_ddl() | Running DDL query: CREATE SCHEMA IF NOT EXISTS "mess";
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:92 - run_ddl() | Running DDL query: CREATE SCHEMA IF NOT EXISTS "laundry";
+2025-07-29 23:27:53 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
