@@ -2,6 +2,8 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncConnec
 from sqlalchemy.engine import Row
 from sqlalchemy import text
 from sqlalchemy.sql.elements import TextClause
+from sqlalchemy.pool import NullPool
+
 from typing import Optional, Union, Dict, Any, Sequence, Literal, AsyncGenerator
 from functools import lru_cache
 from app.logger import AppLogger
@@ -13,31 +15,45 @@ class DBManager:
         logger.debug(f"Initializing DBManager with URL: {db_url}")
         self.db_url = db_url
         self._engine = None
+        self._engine_v2 = None
     
     @property
     def engine(self) -> AsyncEngine:
         if self._engine is None:
             logger.debug("Creating new AsyncEngine instance")
             # Create the async engine with connection pooling
-            # Pool size is set to 20, with a maximum overflow of 10 connections
+            # Pool size is set to 1000, with a maximum overflow of 200 connections
             # Pool timeout is set to 30 seconds, and pool recycle is set to 1800 seconds
             # This configuration is suitable for high concurrency applications
             self._engine = create_async_engine(
                 self.db_url,
                 echo=True,
-                pool_size=20,
-                max_overflow=10,
-                pool_timeout=30,
+                pool_size=100,
+                max_overflow=20,
+                pool_timeout=10,
                 pool_recycle=1800
             )
         return self._engine
+    
+    @property
+    def engine_v2(self) -> AsyncEngine:
+        """Returns a new AsyncEngine instance with NullPool."""
+        logger.debug("Creating new AsyncEngine instance with NullPool")
+        if not self._engine_v2:
+            self._engine_v2 = create_async_engine(
+                self.db_url,
+                echo=True,
+                poolclass=NullPool,
+            )
+        return self._engine_v2
     
     async def execute(
         self,
         sql_query: str,
         params: Optional[Union[Dict[str, Any], Sequence[Dict[str, Any]]]] = None,
         fetch: Literal["all", "one", "none"] = "all",
-        transactional: bool = False
+        transactional: bool = False,
+        v2: bool = True
     ) -> Union[None, Sequence[Dict[str, Any]], Dict[str, Any]]:
         """Executes a SQL query against the database.
         
@@ -51,6 +67,12 @@ class DBManager:
         
         logger.debug(f"Executing SQL query: {sql_query} with params: {params} and fetch type: {fetch}")
         query = text(sql_query)
+        
+        if v2:
+            logger.debug("Using engine_v2 for query execution")
+            async with self.engine_v2.connect() as conn:
+                async with conn.begin():
+                    return await self._run(conn, query, params, fetch)
         
         if transactional:
             logger.debug("Running query in a transactional context")
@@ -113,7 +135,6 @@ class DBManager:
         fetch -- Type of fetch operation: 'all', 'one' or 'none'
         Return: Query results based on fetch and stream type.
         """
-        
         
         result = await conn.execute(query, params or {})
         

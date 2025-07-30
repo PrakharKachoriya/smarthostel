@@ -20,3 +20,10 @@ class CreatePg(BaseModel):
     city: str
     state: str
     postal_code: str
+
+
+class CreateStaff(BaseModel):
+    name: str
+    password: str
+    phone_number: str
+    role: str

@@ -2,7 +2,7 @@ from app.core.database import get_db_manager
 from app.core.utils import get_sql_insert_query_params
 from app.config import DB_URL
 from app.logger import AppLogger
-from app.business.definitions.types import CreateTenant, CreatePg
+from app.business.definitions.types import CreateTenant, CreatePg, CreateStaff
 
 logger = AppLogger().get_logger()
 
@@ -10,19 +10,6 @@ async def add_new_tenant(
     data: CreateTenant,
     pg_id: str
 ):
-    # query = """
-    #     INSERT INTO core.tenants (pg_id, name, email, phone_number, room_number, join_date) VALUES (
-    #         :pg_id, :name, :email, :phone_number, :room_number, COALESCE(:join_date, CURRENT_DATE)
-    #     )
-    # """
-    # params = {
-    #     "pg_id": pg_id,
-    #     "name": name,
-    #     "email": email,
-    #     "phone_number": phone_number,
-    #     "room_number": room_number,
-    #     "join_date": join_date
-    # }
     
     query, params = get_sql_insert_query_params(
         schema="core",
@@ -30,7 +17,29 @@ async def add_new_tenant(
         obj={**data.model_dump(), "pg_id": pg_id},
         return_values=["id", "pg_id", "name"]
     )
-    # logger.info(f"Adding to pg {params['pd_id']} - tenant data: {params}")
+    
+    db_manager = get_db_manager(DB_URL)
+    
+    try:
+        logger.info(f"Executing SQL query")
+        result = await db_manager.execute(query, params, fetch="one", transactional=True)
+        logger.debug(f"Query executed successfully, result: {result}")
+        return result
+    except Exception as e:
+        print(f"Error adding new tenant: {e}")
+        return None
+
+async def add_new_staff(
+    data: CreateStaff,
+    pg_id: str
+):
+    
+    query, params = get_sql_insert_query_params(
+        schema="core",
+        table="staff",
+        obj={**data.model_dump(), "pg_id": pg_id},
+        return_values=["id", "pg_id", "name"]
+    )
     
     db_manager = get_db_manager(DB_URL)
     

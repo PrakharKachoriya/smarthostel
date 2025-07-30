@@ -1,10 +1,9 @@
 import strawberry
 from strawberry.experimental.pydantic import input as pydantic_input
-from strawberry import auto
 from typing import Optional
 from datetime import date, datetime
 
-from app.business.definitions.types import CreatePg, CreateTenant
+from app.business.definitions.types import CreatePg, CreateTenant, CreateStaff
 
 @strawberry.type
 class Pg:
@@ -30,6 +29,16 @@ class Tenant:
     room_number: Optional[int] = None
     join_date: Optional[date] = None
     created_at: Optional[date] = None
+
+@strawberry.type
+class Staff:
+    id: Optional[str] = None
+    pg_id: Optional[str] = None
+    name: Optional[str] = None
+    password: Optional[str] = None
+    phone_number: Optional[str] = None
+    role: Optional[str] = None
+    created_at: Optional[date] = None
     
 @strawberry.type
 class MealActivity:
@@ -45,6 +54,10 @@ class PgInput:
 
 @pydantic_input(model=CreateTenant, all_fields=True)
 class TenantInput:
+    pass
+
+@pydantic_input(model=CreateStaff, all_fields=True)
+class StaffInput:
     pass
 
 

@@ -1,4 +1,14 @@
 services:
+  server:
+    environment:
+      # DB_HOST: db
+      # DB_PORT: 5432
+      DB_HOST: pgbouncer
+      DB_PORT: 6432
+      DB_USER: batlahouse
+      DB_PASSWORD: wandervibez
+      DB_NAME: smartpg
+
   db:
     container_name: smartpg_db_dev
     environment:
@@ -7,3 +17,11 @@ services:
       POSTGRES_DB: smartpg
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+      - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+  
+  pgbouncer:
+    environment:
+      DB_USER: batlahouse
+      DB_PASSWORD: wandervibez
+      DB_NAME: smartpg
+      DB_HOST: db

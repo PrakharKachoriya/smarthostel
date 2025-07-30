@@ -15,20 +15,25 @@ services:
       - "8000:8000"
     volumes:
       - ./server:/app
-
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: batlahouse
-      DB_PASSWORD: wandervibez
-      DB_NAME: smartpg
     depends_on:
+      - pgbouncer
       - db
   
   db:
     image: postgres:17.5
     ports:
       - "5433:5432"
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+  
+  pgbouncer:
+    build: ./pgbouncer
+    ports:
+      - "6432:6432"
+    volumes:
+      - ./pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
+      - ./pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
+    depends_on:
+      - db
 
   redis:
     image: redis:alpine

@@ -1,8 +1,8 @@
 import strawberry
 from strawberry.types import Info
 
-from app.graphql.db.types import Pg, PgInput, Tenant, TenantInput, MealActivityInput
-from app.business.definitions.write import add_new_pg, add_new_tenant, add_new_mealactivity
+from app.graphql.db.types import Pg, PgInput, Tenant, TenantInput, Staff, StaffInput, MealActivityInput
+from app.business.definitions.write import add_new_pg, add_new_tenant, add_new_staff, add_new_mealactivity
 from app.business.ddl.methods import create_schema_if_not_exists, create_table_if_not_exists
 from app.logger import AppLogger
 from app.core.trigger_queue import get_trigger_queue
@@ -21,6 +21,17 @@ class Mutation:
         except Exception as e:
             logger.error(f"Error adding new PG: {e}")
             return None
+    
+    @strawberry.mutation
+    async def add_tenant(self, data: StaffInput, info: Info) -> Staff | None:
+        # print(data.__dict__)
+        try:
+            pg_id = info.context["request"].headers.get("pg_id")
+            result = await add_new_staff(data=data.to_pydantic(), pg_id=str(pg_id))
+            return Staff(**result)
+            
+        except Exception as e:
+            logger.error(e)
     
     @strawberry.mutation
     async def add_tenant(self, data: TenantInput, info: Info) -> Tenant | None:
