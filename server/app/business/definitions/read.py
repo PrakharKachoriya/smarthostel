@@ -206,11 +206,10 @@ async def get_foodrating_data(meal_type: str, date: str = "CURRENT_DATE"):
 async def get_tenants():
     query = """
         SELECT *
-        FROM master.tenants_dim
+        FROM core.tenant
     """
     db_manager = get_db_manager(DB_URL)
     try:
-        
         result = await db_manager.execute(query)
         for row in result:
             yield row
@@ -223,6 +222,24 @@ async def get_mealactivity():
     query = """
         SELECT *
         FROM analytics.meal_activity_fact
+    """
+    db_manager = get_db_manager(DB_URL)
+    try:
+        result = await db_manager.execute(query)
+        for row in result:
+            yield row
+    except Exception as e:
+        print(f"Error printing all tenants {e}")
+        yield None
+
+
+async def get_table_data(
+    schema: str,
+    table: str
+):
+    query = f"""
+        SELECT *
+        FROM {schema}.{table}
     """
     db_manager = get_db_manager(DB_URL)
     try:

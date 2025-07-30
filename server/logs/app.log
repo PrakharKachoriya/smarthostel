@@ -1469,3 +1469,226 @@
 2025-07-30 01:27:41 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
 2025-07-30 01:34:27 | DEBUG | /app/app/core/database.py:92 - run_ddl() | Running DDL query: CREATE TABLE IF NOT EXISTS "core"."tenant" (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), pg_id UUID REFERENCES core.pg(id) ON DELETE CASCADE, password TEXT NOT NULL, name TEXT NOT NULL, email TEXT, phone_number TEXT, room_number INTEGER, join_date DATE DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Kolkata')::DATE, created_at TIMESTAMP DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Kolkata'));
 2025-07-30 01:34:27 | DEBUG | /app/app/core/database.py:97 - run_ddl() | DDL query executed successfully
+2025-07-30 10:39:22 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 10:39:22 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 10:39:22 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 10:39:22 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 10:39:22 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 10:43:21 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 10:46:03 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 10:46:03 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 10:46:03 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 10:46:03 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 10:50:48 | INFO | /app/app/business/definitions/write.py:53 - add_new_pg() | Adding new pg data: {'name': 'Wander Vibez', 'email': 'wndervibez@gmail.com', 'password': 'wandervibez123', 'phone_number': '9726288097', 'address': 'Bodakdev', 'city': 'Ahmedabad', 'state': 'Gujarat', 'postal_code': '380054'}
+2025-07-30 10:50:48 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-30 10:50:48 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO core.pg (name, email, password, phone_number, address, city, state, postal_code)
+        VALUES (:name, :email, :password, :phone_number, :address, :city, :state, :postal_code)
+        RETURNING id, name;
+     with params: {'name': 'Wander Vibez', 'email': 'wndervibez@gmail.com', 'password': 'wandervibez123', 'phone_number': '9726288097', 'address': 'Bodakdev', 'city': 'Ahmedabad', 'state': 'Gujarat', 'postal_code': '380054'} and fetch type: one
+2025-07-30 10:50:48 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-30 10:50:48 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-30 11:06:00 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:06:00 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:06:00 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:06:00 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:06:01 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:13:52 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:13:52 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:13:53 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:13:53 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:16:45 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:16:45 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:16:45 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:16:45 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:16:45 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:16:45 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:16:45 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:16:45 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:19:03 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:19:03 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:19:03 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:19:03 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:19:04 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:19:04 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:19:04 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:19:04 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:22:07 | ERROR | /app/app/graphql/db/mutation.py:34 - add_tenant() | 'requests'
+2025-07-30 11:23:06 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:23:06 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:23:06 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:23:06 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:23:07 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:23:07 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:23:07 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:23:07 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:23:29 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: <starlette.requests.Request object at 0xffffa33da870>
+2025-07-30 11:27:19 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:27:19 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:27:19 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:27:19 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:27:20 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:27:20 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:27:20 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:27:20 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:27:31 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: b'{"query":"# Welcome to GraphiQL\\n#\\n# GraphiQL is an in-browser tool for writing, validating, and\\n# testing GraphQL queries.\\n#\\n# Type queries into this side of the screen, and you will see intelligent\\n# typeaheads aware of the current GraphQL type schema and live syntax and\\n# validation errors highlighted within the text.\\n#\\n# GraphQL queries typically start with a \\"{\\" character. Lines that start\\n# with a # are ignored.\\n#\\n# An example GraphQL query might look like:\\n#\\n#     {\\n#       field(arg: \\"value\\") {\\n#         subField\\n#       }\\n#     }\\n#\\n# Keyboard shortcuts:\\n#\\n#   Prettify query:  Shift-Ctrl-P (or press the prettify button)\\n#\\n#  Merge fragments:  Shift-Ctrl-M (or press the merge button)\\n#\\n#        Run Query:  Ctrl-Enter (or press the play button)\\n#\\n#    Auto Complete:  Ctrl-Space (or just start typing)\\n#\\n\\nmutation ms {\\n  core: createSchema(schemaName: \\"core\\")\\n  mess: createSchema(schemaName: \\"mess\\")\\n  laundry: createSchema(schemaName: \\"laundry\\")\\n}\\n\\nmutation c {\\n  createTable(\\n    schemaName: \\"core\\"\\n    tableName: \\"pg\\"\\n    columns: [\\n      \\"id UUID PRIMARY KEY DEFAULT gen_random_uuid()\\",\\n      \\"name TEXT NOT NULL\\",\\n      \\"email TEXT UNIQUE NOT NULL\\",\\n      \\"password TEXT NOT NULL\\",\\n      \\"phone_number TEXT\\",\\n      \\"address TEXT\\",\\n      \\"city TEXT\\",\\n      \\"state TEXT\\",\\n      \\"postal_code TEXT\\",\\n      \\"created_at TIMESTAMP DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE \'Asia/Kolkata\')\\"\\n  \\t]\\n  )\\n}\\n\\nmutation c2 {\\n  createTable(\\n    schemaName: \\"core\\"\\n    tableName: \\"tenant\\"\\n    columns: [\\n      \\"id UUID PRIMARY KEY DEFAULT gen_random_uuid()\\",\\n      \\"pg_id UUID REFERENCES core.pg(id) ON DELETE CASCADE\\",\\n      \\"password TEXT NOT NULL\\",\\n      \\"name TEXT NOT NULL\\",\\n      \\"email TEXT\\",\\n      \\"phone_number TEXT\\",\\n      \\"room_number INTEGER\\",\\n      \\"join_date DATE DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE \'UTC\' AT TIME ZONE \'Asia/Kolkata\')::DATE\\",\\n      \\"created_at TIMESTAMP DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE \'Asia/Kolkata\')\\"\\n  \\t]\\n  )\\n}\\n\\nmutation pg {\\n  addPg(\\n    data: {\\n      name: \\"Wander Vibez\\"\\n      email: \\"wndervibez@gmail.com\\"\\n      phoneNumber: \\"9726288097\\"\\n      password: \\"wandervibez123\\"\\n      address: \\"Bodakdev\\"\\n      city: \\"Ahmedabad\\"\\n      state: \\"Gujarat\\"\\n      postalCode: \\"380054\\"\\n    }\\n  ){\\n    id\\n    name\\n  }\\n}\\n\\nmutation tenant {\\n  addTenant(\\n    data: {\\n      name: \\"Chinmay Pandya\\"\\n      email: \\"chinmaypandya@gmail.com\\"\\n      phoneNumber: \\"9726288097\\"\\n      password: \\"123\\"\\n      roomNumber: 509\\n    }\\n  )\\n}\\n\\n# {\\n#   getTenants {\\n#     id\\n#     name\\n#     roomNumber\\n#   }\\n# }\\n\\n# {\\n#   getMealactivity {\\n#     tenantId\\n#     roomNumber\\n#     timestamp\\n#     mealType\\n#   }\\n# }\\n\\n# subscription t1 {\\n#   pendingPiechart(\\n#     pgKey: \\"slh\\"\\n#     mealType: \\"Lunch\\"\\n#   ){\\n#     x\\n#     y\\n#   }\\n# }\\n# subscription t2 {\\n#   pendingPiechart(\\n#     pgKey: \\"slh\\"\\n#     mealType: \\"Dinner\\"\\n#   ){\\n#     x\\n#     y\\n#   }\\n# }\\n# subscription t2 {\\n#   task2Listener(mealType: \\"Dinner\\"){\\n#     message {\\n#       id\\n#       name\\n#       roomNumber\\n#     }\\n#   }\\n# }\\n# subscription t3 {\\n#   task3Listener(mealType: \\"Dinner\\"){\\n#     message {\\n#       id\\n#       name\\n#       roomNumber\\n#     }\\n#   }\\n# }","operationName":"tenant"}'
+2025-07-30 11:28:58 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:28:58 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:28:58 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:28:58 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:28:59 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:28:59 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:28:59 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:28:59 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:29:16 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:33:24 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:33:24 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:33:24 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:33:24 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:33:25 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:33:25 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:33:25 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:33:25 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:34:01 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:34:01 | ERROR | /app/app/graphql/db/mutation.py:35 - add_tenant() | 'pd_id'
+2025-07-30 11:35:50 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:35:50 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:35:50 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:35:50 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:35:51 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:35:51 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:35:51 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:35:51 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:36:02 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:36:02 | ERROR | /app/app/graphql/db/mutation.py:35 - add_tenant() | 'pd_id'
+2025-07-30 11:43:56 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:43:56 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:43:56 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:43:56 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:43:57 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:43:57 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:43:57 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:43:57 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:44:12 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:44:12 | DEBUG | /app/app/core/utils.py:13 - get_sql_insert_query_params() | Generating SQL insert query for core.tenants with data: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'join_date': None, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:44:12 | ERROR | /app/app/graphql/db/mutation.py:35 - add_tenant() | 'pd_id'
+2025-07-30 11:46:31 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:46:31 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:46:31 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:46:31 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:46:32 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:46:32 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:46:32 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:46:32 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:46:42 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:46:42 | DEBUG | /app/app/core/utils.py:13 - get_sql_insert_query_params() | Generating SQL insert query for core.tenants with data: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'join_date': None, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:46:42 | DEBUG | /app/app/core/utils.py:25 - get_sql_insert_query_params() | Generated SQL query: 
+        INSERT INTO core.tenants (name, email, password, phone_number, room_number, pg_id)
+        VALUES (:name, :email, :password, :phone_number, :room_number, :pg_id)
+        RETURNING id, pg_id, name;
+     with params: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:46:42 | ERROR | /app/app/graphql/db/mutation.py:35 - add_tenant() | 'pd_id'
+2025-07-30 11:48:33 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:48:33 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:48:33 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:48:33 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:48:34 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:48:34 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:48:34 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:48:34 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:49:06 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:49:06 | DEBUG | /app/app/core/utils.py:13 - get_sql_insert_query_params() | Generating SQL insert query for core.tenants with data: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'join_date': None, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:49:06 | DEBUG | /app/app/core/utils.py:25 - get_sql_insert_query_params() | Generated SQL query: 
+        INSERT INTO core.tenants (name, email, password, phone_number, room_number, pg_id)
+        VALUES (:name, :email, :password, :phone_number, :room_number, :pg_id)
+        RETURNING id, pg_id, name;
+     with params: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:49:06 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-30 11:49:06 | INFO | /app/app/business/definitions/write.py:38 - add_new_tenant() | Executing SQL query
+2025-07-30 11:49:06 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO core.tenants (name, email, password, phone_number, room_number, pg_id)
+        VALUES (:name, :email, :password, :phone_number, :room_number, :pg_id)
+        RETURNING id, pg_id, name;
+     with params: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'} and fetch type: one
+2025-07-30 11:49:06 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-30 11:49:06 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-30 11:50:13 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:50:13 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:50:13 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:50:13 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:50:14 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:50:14 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:50:14 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:50:14 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:50:24 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:50:24 | DEBUG | /app/app/core/utils.py:13 - get_sql_insert_query_params() | Generating SQL insert query for core.tenant with data: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'join_date': None, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:50:24 | DEBUG | /app/app/core/utils.py:25 - get_sql_insert_query_params() | Generated SQL query: 
+        INSERT INTO core.tenant (name, email, password, phone_number, room_number, pg_id)
+        VALUES (:name, :email, :password, :phone_number, :room_number, :pg_id)
+        RETURNING id, pg_id, name;
+     with params: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:50:24 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-30 11:50:24 | INFO | /app/app/business/definitions/write.py:38 - add_new_tenant() | Executing SQL query
+2025-07-30 11:50:24 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO core.tenant (name, email, password, phone_number, room_number, pg_id)
+        VALUES (:name, :email, :password, :phone_number, :room_number, :pg_id)
+        RETURNING id, pg_id, name;
+     with params: {'name': 'Chinmay Pandya', 'email': 'chinmaypandya@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'} and fetch type: one
+2025-07-30 11:50:24 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-30 11:50:24 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-30 11:50:25 | DEBUG | /app/app/business/definitions/write.py:40 - add_new_tenant() | Query executed successfully, result: {'id': UUID('137ff834-3b15-4495-8536-1b181dccfe4c'), 'pg_id': UUID('ea813d9e-fef8-4a2d-855c-e9bac8501b19'), 'name': 'Chinmay Pandya'}
+2025-07-30 11:53:04 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:53:04 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:53:04 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:53:04 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:53:04 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:53:04 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:53:04 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:53:04 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 11:53:51 | INFO | /app/app/graphql/db/mutation.py:30 - add_tenant() | Adding tenant to PG with ID: ea813d9e-fef8-4a2d-855c-e9bac8501b19
+2025-07-30 11:53:51 | DEBUG | /app/app/core/utils.py:13 - get_sql_insert_query_params() | Generating SQL insert query for core.tenant with data: {'name': 'Nitya Balar', 'email': 'nityabalar@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'join_date': None, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:53:51 | DEBUG | /app/app/core/utils.py:25 - get_sql_insert_query_params() | Generated SQL query: 
+        INSERT INTO core.tenant (name, email, password, phone_number, room_number, pg_id)
+        VALUES (:name, :email, :password, :phone_number, :room_number, :pg_id)
+        RETURNING id, pg_id, name;
+     with params: {'name': 'Nitya Balar', 'email': 'nityabalar@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'}
+2025-07-30 11:53:51 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-30 11:53:51 | INFO | /app/app/business/definitions/write.py:38 - add_new_tenant() | Executing SQL query
+2025-07-30 11:53:51 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        INSERT INTO core.tenant (name, email, password, phone_number, room_number, pg_id)
+        VALUES (:name, :email, :password, :phone_number, :room_number, :pg_id)
+        RETURNING id, pg_id, name;
+     with params: {'name': 'Nitya Balar', 'email': 'nityabalar@gmail.com', 'password': '123', 'phone_number': '9726288097', 'room_number': 509, 'pg_id': 'ea813d9e-fef8-4a2d-855c-e9bac8501b19'} and fetch type: one
+2025-07-30 11:53:51 | DEBUG | /app/app/core/database.py:56 - execute() | Running query in a transactional context
+2025-07-30 11:53:51 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-30 11:53:51 | DEBUG | /app/app/business/definitions/write.py:40 - add_new_tenant() | Query executed successfully, result: {'id': UUID('bc02a8f6-d6aa-4ac0-81ca-71f51e821288'), 'pg_id': UUID('ea813d9e-fef8-4a2d-855c-e9bac8501b19'), 'name': 'Nitya Balar'}
+2025-07-30 11:58:52 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 11:58:52 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 11:58:52 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 11:58:52 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 11:58:53 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 11:58:53 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 11:58:53 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 11:58:53 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 12:01:12 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-30 12:01:12 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM core.tenant
+     with params: None and fetch type: all
+2025-07-30 12:01:12 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-30 12:01:12 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance
+2025-07-30 12:02:54 | DEBUG | /app/app/core/trigger_queue.py:48 - stop() | Stopping SingleWorkerTriggerQueue worker
+2025-07-30 12:02:54 | DEBUG | /app/app/core/trigger_queue.py:51 - stop() | Cancelling worker task
+2025-07-30 12:02:54 | ERROR | /app/app/core/trigger_queue.py:71 - _run() | TriggerQueue worker cancelled
+2025-07-30 12:02:54 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-30 12:02:55 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-30 12:02:55 | DEBUG | /app/app/core/trigger_queue.py:41 - start() | Starting SingleWorkerTriggerQueue worker
+2025-07-30 12:02:55 | DEBUG | /app/app/core/trigger_queue.py:44 - start() | Creating new worker task
+2025-07-30 12:02:55 | INFO | /app/app/graphql/analytics/aggregator.py:67 - lifespan() | Trigger queue started
+2025-07-30 12:03:06 | DEBUG | /app/app/core/database.py:13 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-30 12:03:06 | DEBUG | /app/app/core/database.py:52 - execute() | Executing SQL query: 
+        SELECT *
+        FROM core.tenant
+     with params: None and fetch type: all
+2025-07-30 12:03:06 | DEBUG | /app/app/core/database.py:60 - execute() | Running query in a non-transactional context
+2025-07-30 12:03:06 | DEBUG | /app/app/core/database.py:20 - engine() | Creating new AsyncEngine instance

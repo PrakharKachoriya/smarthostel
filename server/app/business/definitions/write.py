@@ -2,7 +2,7 @@ from app.core.database import get_db_manager
 from app.core.utils import get_sql_insert_query_params
 from app.config import DB_URL
 from app.logger import AppLogger
-from app.business.definitions.types import CreateTenant
+from app.business.definitions.types import CreateTenant, CreatePg
 
 logger = AppLogger().get_logger()
 
@@ -26,11 +26,33 @@ async def add_new_tenant(
     
     query, params = get_sql_insert_query_params(
         schema="core",
-        table="tenants",
-        obj=data.model_dump()
+        table="tenant",
+        obj={**data.model_dump(), "pg_id": pg_id},
+        return_values=["id", "pg_id", "name"]
     )
-    params["pd_id"] = pg_id
-    logger.info(f"Adding to pg {params["pd_id"]} - tenant data: {params}")
+    # logger.info(f"Adding to pg {params['pd_id']} - tenant data: {params}")
+    
+    db_manager = get_db_manager(DB_URL)
+    
+    try:
+        logger.info(f"Executing SQL query")
+        result = await db_manager.execute(query, params, fetch="one", transactional=True)
+        logger.debug(f"Query executed successfully, result: {result}")
+        return result
+    except Exception as e:
+        print(f"Error adding new tenant: {e}")
+        return None
+    
+async def add_new_pg(
+    data: CreatePg,
+):  
+    query, params = get_sql_insert_query_params(
+        schema="core",
+        table="pg",
+        obj=data.model_dump(),
+        return_values=["id", "name"]
+    )
+    logger.info(f"Adding new pg data: {params}")
     
     db_manager = get_db_manager(DB_URL)
     
