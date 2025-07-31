@@ -38,3 +38,9 @@
 2025-07-31 16:27:02 GMT [29]: user=,db= LOG:  checkpoint starting: shutdown immediate
 2025-07-31 16:27:02 GMT [29]: user=,db= LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.009 s; sync files=3, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/19C8198, redo lsn=0/19C8198
 2025-07-31 16:27:02 GMT [1]: user=,db= LOG:  database system is shut down
+2025-07-31 19:49:02 GMT [1]: user=,db= LOG:  starting PostgreSQL 17.5 (Debian 17.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2025-07-31 19:49:02 GMT [1]: user=,db= LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-07-31 19:49:02 GMT [1]: user=,db= LOG:  listening on IPv6 address "::", port 5432
+2025-07-31 19:49:02 GMT [1]: user=,db= LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-07-31 19:49:02 GMT [31]: user=,db= LOG:  database system was shut down at 2025-07-31 16:27:02 GMT
+2025-07-31 19:49:02 GMT [1]: user=,db= LOG:  database system is ready to accept connections

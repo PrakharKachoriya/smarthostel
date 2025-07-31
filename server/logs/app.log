@@ -2270,3 +2270,35 @@
 2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-3 cancelled
 2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-3 stopped
 2025-07-31 15:12:34 | INFO | /app/app/graphql/analytics/aggregator.py:76 - lifespan() | Trigger queue stopped
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:03 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:04 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:09 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 19:49:15 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers

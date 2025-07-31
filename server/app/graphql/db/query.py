@@ -1,11 +1,9 @@
 import strawberry
 from strawberry.types import Info
 
-from app.graphql.db.types import Tenant, MealActivity
+from app.graphql.db.types import Tenant, QRScanLog
 from app.business.definitions.read import (
-    get_table_data,
-    get_tenants as get_tenants_data,
-    get_mealactivity as get_mealactivity_data
+    get_table_data
 )
 
 
@@ -16,5 +14,5 @@ class Query:
         return [Tenant(**row) async for row in get_table_data("core", "tenant")]
     
     @strawberry.field
-    async def get_mealactivity(self, info: Info) -> list[MealActivity]:
-        return [MealActivity(**row) async for row in get_table_data("analytics", "meal_activity_fact")]
+    async def get_mealactivity(self, info: Info) -> list[QRScanLog]:
+        return [QRScanLog(**row) async for row in get_table_data("mess", "daily_scans")]
