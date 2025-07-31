@@ -51,7 +51,7 @@ class QRScanLog:
     pg_id: Optional[str]
     tenant_id: Optional[str] = None
     meal_type: Optional[str] = None
-    timestamp: Optional[datetime] = None # Can be also managed in SQL as CURRENT_TIMESTAMP
+    curr_timestamp: Optional[datetime] = None # Can be also managed in SQL as CURRENT_TIMESTAMP
     curr_date: Optional[date] = None
 
 @pydantic_input(model=CreatePg, all_fields=True)

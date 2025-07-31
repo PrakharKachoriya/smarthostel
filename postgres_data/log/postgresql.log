@@ -44,3 +44,16 @@
 2025-07-31 19:49:02 GMT [1]: user=,db= LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
 2025-07-31 19:49:02 GMT [31]: user=,db= LOG:  database system was shut down at 2025-07-31 16:27:02 GMT
 2025-07-31 19:49:02 GMT [1]: user=,db= LOG:  database system is ready to accept connections
+2025-07-31 19:54:02 GMT [29]: user=,db= LOG:  checkpoint starting: time
+2025-07-31 19:54:02 GMT [29]: user=,db= LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.013 s, sync=0.001 s, total=0.031 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/19C82A0, redo lsn=0/19C8248
+2025-07-31 19:56:59 GMT [58]: user=[unknown],db=[unknown] LOG:  connection received: host=172.26.0.3 port=54556
+2025-07-31 19:56:59 GMT [58]: user=batlahouse,db=smartpg LOG:  connection authenticated: identity="batlahouse" method=scram-sha-256 (/var/lib/postgresql/data/pg_hba.conf:128)
+2025-07-31 19:56:59 GMT [58]: user=batlahouse,db=smartpg LOG:  connection authorized: user=batlahouse database=smartpg
+2025-07-31 19:58:13 GMT [58]: user=batlahouse,db=smartpg LOG:  disconnection: session time: 0:01:13.624 user=batlahouse database=smartpg host=172.26.0.3 port=54556
+2025-07-31 19:58:21 GMT [1]: user=,db= LOG:  received fast shutdown request
+2025-07-31 19:58:21 GMT [1]: user=,db= LOG:  aborting any active transactions
+2025-07-31 19:58:21 GMT [1]: user=,db= LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
+2025-07-31 19:58:21 GMT [29]: user=,db= LOG:  shutting down
+2025-07-31 19:58:21 GMT [29]: user=,db= LOG:  checkpoint starting: shutdown immediate
+2025-07-31 19:58:21 GMT [29]: user=,db= LOG:  checkpoint complete: wrote 45 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.020 s, sync=0.003 s, total=0.029 s; sync files=36, longest=0.001 s, average=0.001 s; distance=171 kB, estimate=171 kB; lsn=0/19F30A0, redo lsn=0/19F30A0
+2025-07-31 19:58:21 GMT [1]: user=,db= LOG:  database system is shut down
