@@ -2,6 +2,9 @@ from datetime import date
 
 from app.core.database import get_db_manager
 from app.config import DB_URL
+from app.logger import AppLogger
+
+logger = AppLogger().get_logger()
 
 
 async def get_mealpending_data(meal_type: str, date: date = date.today()):
@@ -247,5 +250,5 @@ async def get_table_data(
         for row in result:
             yield row
     except Exception as e:
-        print(f"Error printing all tenants {e}")
+        logger.error(f"Error printing all tenants {e}")
         yield None

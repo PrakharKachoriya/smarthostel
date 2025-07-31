@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncConnec
 from sqlalchemy.engine import Row
 from sqlalchemy import text
 from sqlalchemy.sql.elements import TextClause
-from sqlalchemy.pool import NullPool
+from sqlalchemy.pool import NullPool, QueuePool
 
 from typing import Optional, Union, Dict, Any, Sequence, Literal, AsyncGenerator
 from functools import lru_cache
@@ -29,9 +29,9 @@ class DBManager:
                 self.db_url,
                 echo=True,
                 pool_size=100,
-                max_overflow=20,
+                max_overflow=40,
                 pool_timeout=10,
-                pool_recycle=1800
+                pool_recycle=1800,
             )
         return self._engine
     
@@ -53,7 +53,7 @@ class DBManager:
         params: Optional[Union[Dict[str, Any], Sequence[Dict[str, Any]]]] = None,
         fetch: Literal["all", "one", "none"] = "all",
         transactional: bool = False,
-        v2: bool = True
+        v2: bool = False
     ) -> Union[None, Sequence[Dict[str, Any]], Dict[str, Any]]:
         """Executes a SQL query against the database.
         
@@ -109,10 +109,19 @@ class DBManager:
     async def run_ddl(
         self,
         sql_query: str,
+        v2: bool = False
     ) -> AsyncGenerator[Any, Any]:
         
         logger.debug(f"Running DDL query: {sql_query}")
         query = text(sql_query)
+        
+        if v2:
+            async with self.engine_v2.connect() as conn:
+                logger.debug("Using engine_v2 for DDL query execution")
+                async with conn.begin():
+                    result = await conn.execute(query, {})
+                    logger.debug("DDL query executed successfully")
+                    return result.rowcount
         
         async with self.engine.begin() as conn:
             result = await conn.execute(query, {})

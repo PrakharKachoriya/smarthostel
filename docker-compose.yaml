@@ -16,14 +16,17 @@ services:
     volumes:
       - ./server:/app
     depends_on:
-      - pgbouncer
       - db
+    networks:
+      - smartnet
   
   db:
     image: postgres:17.5
     ports:
       - "5433:5432"
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    networks:
+      - smartnet
   
   pgbouncer:
     build: ./pgbouncer
@@ -39,3 +42,7 @@ services:
     image: redis:alpine
     ports:
       - "6379:6379"
+
+networks:
+  smartnet:
+    driver: bridge

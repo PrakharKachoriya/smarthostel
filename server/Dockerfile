@@ -31,5 +31,5 @@ COPY app /app
 ENV PYTHONUNBUFFERED=1
 
 # Entry point of app
-CMD ["uvicorn", "app.main:app", "--ws", "--workers", "4" "websockets", "--loop", "uvloop", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--ws", "websockets", "--workers", "4", "--loop", "uvloop", "--host", "0.0.0.0", "--port", "8000"]
     
