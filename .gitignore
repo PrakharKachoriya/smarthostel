@@ -1,3 +1,5 @@
 smartpg/
 __pycache__/
 postgres_data/
+.DS_Store
+postgres_data.zip

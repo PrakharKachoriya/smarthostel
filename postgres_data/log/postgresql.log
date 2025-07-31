@@ -31,3 +31,10 @@
 2025-07-31 15:11:12 GMT [36]: user=batlahouse,db=smartpg LOG:  connection authenticated: identity="batlahouse" method=scram-sha-256 (/var/lib/postgresql/data/pg_hba.conf:128)
 2025-07-31 15:11:12 GMT [36]: user=batlahouse,db=smartpg LOG:  connection authorized: user=batlahouse database=smartpg
 2025-07-31 15:12:34 GMT [36]: user=batlahouse,db=smartpg LOG:  disconnection: session time: 0:01:21.958 user=batlahouse database=smartpg host=172.26.0.3 port=47324
+2025-07-31 16:27:02 GMT [1]: user=,db= LOG:  received fast shutdown request
+2025-07-31 16:27:02 GMT [1]: user=,db= LOG:  aborting any active transactions
+2025-07-31 16:27:02 GMT [1]: user=,db= LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
+2025-07-31 16:27:02 GMT [29]: user=,db= LOG:  shutting down
+2025-07-31 16:27:02 GMT [29]: user=,db= LOG:  checkpoint starting: shutdown immediate
+2025-07-31 16:27:02 GMT [29]: user=,db= LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.009 s; sync files=3, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/19C8198, redo lsn=0/19C8198
+2025-07-31 16:27:02 GMT [1]: user=,db= LOG:  database system is shut down

@@ -154,7 +154,7 @@ async def get_floorwisecount_data(
             yield row
     except Exception as e:
         print(f"Error fetching floor wise data: {e}")
-        return None
+        yield None
         
     
 
