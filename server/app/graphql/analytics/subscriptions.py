@@ -25,7 +25,7 @@ class Subscription:
         
         pubsub = get_pub_sub()
         async for message in pubsub.subscribe(f"{pg_key}_mealpending_piechart_{meal_type}"):
-            yield [MealPending_PieChart(**data) for data in message]
+            yield MealPending_PieChart(**message)
     
     @strawberry.subscription
     async def floorwisecount_barchart(self, meal_type: str, floor: int) -> AsyncGenerator[FloorWiseCount_DoubleBarChart, None]:

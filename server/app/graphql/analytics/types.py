@@ -4,8 +4,8 @@ from app.graphql.db.types import Tenant
 
 @strawberry.type
 class MealPending_PieChart:
-    x: str
-    y: int
+    labels: list[str]
+    values: list[int]
 
 @strawberry.type
 class MealTime_LineChart:

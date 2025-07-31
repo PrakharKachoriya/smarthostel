@@ -20,15 +20,18 @@ async def handle_trigger(payload: dict):
     async def task_1():
         topic = f"{payload["pg_key"]}_mealpending_piechart_{payload["meal_type"]}"
         logger.debug(f"Task started for {topic}")
+        res = {
+            "labels": [],
+            "values": []
+        }
         try:
-            res = [
-                {
-                    "x": row['status'], "y": row['value_counts']
-                } async for row in get_mealpending_data(payload["meal_type"])
-            ]
+            async for row in get_mealpending_data(payload["meal_type"]):
+                res["labels"].append(row["status"])
+                res["values"].append(row["value_counts"])
+            
         except Exception as e:
             logger.error(f"Error fetching meal pending data: {e}")
-            res = []
+
         logger.debug(f"Task meal pending pie chart completed with result: {res}")
         try:
             await pubsub.publish(topic, res)
