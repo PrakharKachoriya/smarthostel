@@ -27,3 +27,8 @@ class CreateStaff(BaseModel):
     password: str
     phone_number: str
     role: str
+
+
+class CreateQRScanLog(BaseModel):
+    tenant_id: str
+    meal_type: str

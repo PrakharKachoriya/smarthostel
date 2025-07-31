@@ -3,7 +3,12 @@ from strawberry.experimental.pydantic import input as pydantic_input
 from typing import Optional
 from datetime import date, datetime
 
-from app.business.definitions.types import CreatePg, CreateTenant, CreateStaff
+from app.business.definitions.types import (
+    CreatePg,
+    CreateTenant,
+    CreateStaff,
+    CreateQRScanLog
+)
 
 @strawberry.type
 class Pg:
@@ -41,12 +46,13 @@ class Staff:
     created_at: Optional[date] = None
     
 @strawberry.type
-class MealActivity:
-    tenant_id: str
-    room_number: int
-    meal_type: str
-    timestamp: datetime | None = None # Can be also managed in SQL as CURRENT_TIMESTAMP
-    rating: int | None = None # Rating is to be added later, defaulting to None
+class QRScanLog:
+    id: Optional[str]
+    pg_id: Optional[str]
+    tenant_id: Optional[str] = None
+    meal_type: Optional[str] = None
+    timestamp: Optional[datetime] = None # Can be also managed in SQL as CURRENT_TIMESTAMP
+    curr_date: Optional[date] = None
 
 @pydantic_input(model=CreatePg, all_fields=True)
 class PgInput:
@@ -60,11 +66,6 @@ class TenantInput:
 class StaffInput:
     pass
 
-
-@strawberry.input
-class MealActivityInput:
-    tenant_id: str
-    room_number: int
-    meal_type: str
-    timestamp: datetime | None = None
-    rating: int | None = None
+@pydantic_input(model=CreateQRScanLog, all_fields=True)
+class QRScanLogInput:
+    pass

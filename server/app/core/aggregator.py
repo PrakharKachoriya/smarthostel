@@ -2,8 +2,10 @@ import asyncio
 
 from contextlib import asynccontextmanager
 
-from app.business.definitions.read import get_tenants as get_tenants_data
-from app.business.definitions.read import get_mealpending_data, get_floorwisecount_data
+from app.business.definitions.read import (
+    get_mealpending_data,
+    get_floorwisecount_data
+)
 from app.core.trigger_queue import get_trigger_queue
 from app.core.pubsub import get_pub_sub
 from app.logger import AppLogger
@@ -25,7 +27,10 @@ async def handle_trigger(payload: dict):
             "values": []
         }
         try:
-            async for row in get_mealpending_data(payload["meal_type"]):
+            async for row in get_mealpending_data(
+                pd_id=payload["pg_key"],
+                meal_type=payload["meal_type"]
+            ):
                 res["labels"].append(row["status"])
                 res["values"].append(row["value_counts"])
             
@@ -45,13 +50,17 @@ async def handle_trigger(payload: dict):
         res = {}
         room_data = {}
         try:
-            async for row in get_floorwisecount_data(payload["meal_type"], "5"):
+            async for row in get_floorwisecount_data(
+                pg_id=payload["pg_key"],
+                meal_type=payload["meal_type"],
+                floor_number=5
+            ):
                 room = row["room_number"]
                 status = row["status"]
                 count = row["value_counts"]
                 room_data[room][status] = count
 
-                sorted_rooms = sorted(room_data.keys())
+            sorted_rooms = sorted(room_data.keys())
 
             # Prepare counts aligned with sorted rooms
             pending_counts = [room_data[room].get('pending', 0) for room in sorted_rooms]

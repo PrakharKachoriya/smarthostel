@@ -2,7 +2,9 @@ from app.core.database import get_db_manager
 from app.core.utils import get_sql_insert_query_params
 from app.config import DB_URL
 from app.logger import AppLogger
-from app.business.definitions.types import CreateTenant, CreatePg, CreateStaff
+from app.business.definitions.types import (
+    CreateTenant, CreatePg, CreateStaff, CreateQRScanLog
+)
 
 logger = AppLogger().get_logger()
 
@@ -73,25 +75,18 @@ async def add_new_pg(
         return None
 
 
-async def add_new_mealactivity(
-    tenant_id: str,
-    meal_type: str,
-    room_number: int | None = None,
-    timestamp: float | None = None,
-    rating: int | None = None
+async def add_new_qr_scan_log(
+    pg_id: str,
+    data: CreateQRScanLog
 ):
-    logger.info(f"Adding new meal activity for tenant {tenant_id}, room {room_number}, meal type {meal_type}, timestamp {timestamp}, rating {rating}")
     
-    query = """
-        INSERT INTO analytics.meal_activity_fact (tenant_id, room_number, meal_type, timestamp, rating) VALUES (
-            :tenant_id, :room_number, :meal_type, CURRENT_TIMESTAMP, NULL
-        )
-    """
-    params = {
-        "tenant_id": tenant_id,
-        "room_number": room_number,
-        "meal_type": meal_type,
-    }
+    query, params = get_sql_insert_query_params(
+        schema="mess",
+        table="daily_scans",
+        obj=data.model_dump(),
+        return_values=["id", "pg_id", "tenant_id", "meal_type"]
+    )
+    logger.info(f"Adding new QR scan log for pg {pg_id} with data: {params}")
     
     db_manager = get_db_manager(DB_URL)
     try:

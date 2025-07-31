@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.logger import AppLogger
-from app.graphql.analytics.aggregator import lifespan
+from app.core.aggregator import lifespan
 from app.graphql.router import graphql_router
 
 AppLogger("app")

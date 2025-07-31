@@ -24,7 +24,7 @@ services:
     image: postgres:17.5
     ports:
       - "5433:5432"
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    command: ["postgres" ,"-c" , "config_file=/etc/postgresql/postgresql.conf"]
     networks:
       - smartnet
   

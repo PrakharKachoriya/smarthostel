@@ -7,17 +7,24 @@ from app.logger import AppLogger
 logger = AppLogger().get_logger()
 
 
-async def get_mealpending_data(meal_type: str, date: date = date.today()):
+async def get_mealpending_data(
+    pg_id: str,
+    meal_type: str,
+    date: date = date.today()
+):
     query = """
         WITH tenants AS (
             SELECT id AS tenant_id
-            FROM master.tenants_dim
+            FROM core.tenant
+            WHERE PG_ID = :pg_id
         )
         
         , meal_activity AS (
             SELECT tenant_id
-            FROM analytics.meal_activity_fact
-            WHERE meal_type = :meal_type AND timestamp::date = CURRENT_DATE
+            FROM mess.daily_scans
+            WHERE PG_ID = :pg_id
+                AND meal_type = :meal_type
+                AND timestamp::date = CURRENT_DATE
         )
         
         , combined AS (
@@ -54,6 +61,7 @@ async def get_mealpending_data(meal_type: str, date: date = date.today()):
     """
     
     params = {
+        "pg_id": pg_id,
         "meal_type": meal_type,
         # "date": date
     }
@@ -65,10 +73,11 @@ async def get_mealpending_data(meal_type: str, date: date = date.today()):
             yield row
     except Exception as e:
         print(f"Error fetching meal pending data: {e}")
-        yield None
+        yield {}
     
     
 async def get_floorwisecount_data(
+    pg_id: str,
     meal_type: str,
     floor_number: int,
     date: str = "CURRENT_DATE"
@@ -78,15 +87,16 @@ async def get_floorwisecount_data(
             SELECT 
                 id AS tenant_id
                 , room_number
-            FROM master.tenants_dim
-            WHERE room_number LIKE '{floor_number}%'
+            FROM core.tenant
+            WHERE PG_ID = :pg_id
+                AND room_number LIKE ':floor_number%'
         )
             
         , meal_activity AS (
             SELECT tenant_id
-            FROM analytics.meal_activity_fact
-            WHERE
-                meal_type = :meal_type
+            FROM mess.daily_scans
+            WHERE PG_ID = :pg_id
+                AND meal_type = :meal_type
                 AND timestamp::date = CURRENT_DATE
         )
         
@@ -142,9 +152,9 @@ async def get_floorwisecount_data(
     """
     
     params = {
+        "pg_id": pg_id,
         "meal_type": meal_type,
         "floor_number": floor_number,
-        # "date": date
     }
     
     db_manager = get_db_manager(DB_URL)
@@ -154,93 +164,7 @@ async def get_floorwisecount_data(
             yield row
     except Exception as e:
         print(f"Error fetching floor wise data: {e}")
-        yield None
-        
-    
-
-async def get_mealtime_data(meal_type:str, date: str = 'CURRENT_DATE'):
-    query = """
-        WITH time_data AS (
-            SELECT tenant_id, TO_CHAR(timestamp::time, 'HH24:MI' ) AS time_value 
-            FROM analytics.meal_activity_fact
-            WHERE meal_type = :meal_type AND timestamp::date = :date
-        )
-        
-        SELECT time_value, COUNT(tenant_id) AS value_counts
-        FROM time_data
-        GROUP BY time_value
-    """
-    
-    params = {
-        "meal_type": meal_type,
-        "date": date
-    }
-    
-    db_manager = get_db_manager(DB_URL)
-    try:
-        rows = await db_manager.execute(query, params)
-        for row in rows:
-            yield row
-    except Exception as e:
-        print(f"Error fetching meal time line chart data: {e}")
-        yield None
-
-async def get_foodrating_data(meal_type: str, date: str = "CURRENT_DATE"):
-    query = """
-        WITH ratings AS (
-            SELECT tenant_id, rating
-            FROM analytics.meal_activity_fact
-            WHERE meal_type = :meal_type AND timestamp::date = :date
-        )
-        
-        SELECT rating, COUNT(tenant_id) AS value_counts
-        FROM ratings
-        GROUP BY rating
-    """
-    
-    params = {
-        "meal_type": meal_type,
-        "date": date
-    }
-    
-    db_manager = get_db_manager(DB_URL)
-    try:
-        rows = await db_manager.execute(query, params)
-        for row in rows:
-            yield row
-    except Exception as e:
-        print(f"Error fetching food rating data: {e}")
-        yield None
-
-
-async def get_tenants():
-    query = """
-        SELECT *
-        FROM core.tenant
-    """
-    db_manager = get_db_manager(DB_URL)
-    try:
-        result = await db_manager.execute(query)
-        for row in result:
-            yield row
-    except Exception as e:
-        print(f"Error printing all tenants {e}")
-        yield None
-
-
-async def get_mealactivity():
-    query = """
-        SELECT *
-        FROM analytics.meal_activity_fact
-    """
-    db_manager = get_db_manager(DB_URL)
-    try:
-        result = await db_manager.execute(query)
-        for row in result:
-            yield row
-    except Exception as e:
-        print(f"Error printing all tenants {e}")
-        yield None
+        yield {}
 
 
 async def get_table_data(
@@ -258,4 +182,4 @@ async def get_table_data(
             yield row
     except Exception as e:
         logger.error(f"Error printing all tenants {e}")
-        yield None
+        yield {}

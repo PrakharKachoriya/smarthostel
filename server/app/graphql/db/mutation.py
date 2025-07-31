@@ -1,8 +1,11 @@
 import strawberry
 from strawberry.types import Info
 
-from app.graphql.db.types import Pg, PgInput, Tenant, TenantInput, Staff, StaffInput, MealActivityInput
-from app.business.definitions.write import add_new_pg, add_new_tenant, add_new_staff, add_new_mealactivity
+from app.graphql.db.types import (
+    Pg, PgInput, Tenant, TenantInput, Staff, StaffInput,
+    QRScanLog, QRScanLogInput
+)
+from app.business.definitions.write import add_new_pg, add_new_tenant, add_new_staff, add_new_qr_scan_log
 from app.business.ddl.methods import create_schema_if_not_exists, create_table_if_not_exists
 from app.logger import AppLogger
 from app.core.trigger_queue import get_trigger_queue
@@ -46,14 +49,19 @@ class Mutation:
             logger.error(e)
     
     @strawberry.mutation
-    async def add_mealactivity(self, data: MealActivityInput, info: Info) -> None:
-        # print(data.__dict__)
+    async def add_mealactivity(
+        self,
+        data: QRScanLogInput,
+        info: Info
+    ) -> QRScanLog | None:
+        
         try:
-            await add_new_mealactivity(**data.__dict__)
+            pg_id = info.context["request"].headers.get("pg_id")
+            res = await add_new_qr_scan_log(data=data.to_pydantic(), pg_id=pg_id)
             
             trigger_payload = {
-                "action": "meal_activity_added",
-                "pg_key": "slh",
+                "action": "qr scanned",
+                "pg_key": pg_id,
                 "meal_type": data.meal_type
             }
             
@@ -77,6 +85,8 @@ class Mutation:
         """Create a new table in the specified schema."""
         
         try:
+            # pg_id = info.context["request"].headers.get("pg_id")
+            # To be used for partitioning new table for pg id
             await create_table_if_not_exists(schema_name, table_name, columns)
         except Exception as e:
             print(f"Error creating table {schema_name}.{table_name}: {e}")
