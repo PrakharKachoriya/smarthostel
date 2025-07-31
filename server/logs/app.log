@@ -2187,3 +2187,86 @@
 2025-07-31 00:19:48 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-3 stopped
 2025-07-31 00:19:48 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
 2025-07-31 00:19:48 | INFO | /app/app/graphql/analytics/aggregator.py:73 - lifespan() | Trigger queue stopped
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:77 - __init__() | Initializing MultiWorkerTriggerQueue with 4 workers
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:11 - __init__() | Initializing TriggerQueue
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:84 - start() | Starting 4 workers
+2025-07-31 15:10:49 | INFO | /app/app/graphql/analytics/aggregator.py:70 - lifespan() | Trigger queue started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:84 - start() | Starting 4 workers
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-0 started
+2025-07-31 15:10:49 | INFO | /app/app/graphql/analytics/aggregator.py:70 - lifespan() | Trigger queue started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-0 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-1 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-2 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-3 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-1 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-2 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-3 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:84 - start() | Starting 4 workers
+2025-07-31 15:10:49 | INFO | /app/app/graphql/analytics/aggregator.py:70 - lifespan() | Trigger queue started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-0 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-1 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-2 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-3 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:84 - start() | Starting 4 workers
+2025-07-31 15:10:49 | INFO | /app/app/graphql/analytics/aggregator.py:70 - lifespan() | Trigger queue started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-0 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-1 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-2 started
+2025-07-31 15:10:49 | DEBUG | /app/app/core/trigger_queue.py:107 - _run() | Worker-3 started
+2025-07-31 15:11:12 | DEBUG | /app/app/core/database.py:15 - __init__() | Initializing DBManager with URL: postgresql+asyncpg://batlahouse:wandervibez@db:5432/smartpg
+2025-07-31 15:11:12 | DEBUG | /app/app/core/database.py:68 - execute() | Executing SQL query: 
+        SELECT *
+        FROM core.tenant
+     with params: None and fetch type: all
+2025-07-31 15:11:12 | DEBUG | /app/app/core/database.py:82 - execute() | Running query in a non-transactional context
+2025-07-31 15:11:12 | DEBUG | /app/app/core/database.py:23 - engine() | Creating new AsyncEngine instance
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:92 - stop() | Stopping all workers
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-0 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:92 - stop() | Stopping all workers
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-0 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-0 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-1 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-0 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-1 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-1 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-2 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-1 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-2 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-2 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-2 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-3 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-3 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-3 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-3 stopped
+2025-07-31 15:12:34 | INFO | /app/app/graphql/analytics/aggregator.py:76 - lifespan() | Trigger queue stopped
+2025-07-31 15:12:34 | INFO | /app/app/graphql/analytics/aggregator.py:76 - lifespan() | Trigger queue stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:92 - stop() | Stopping all workers
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-0 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-0 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-1 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-1 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-2 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-2 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-3 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-3 stopped
+2025-07-31 15:12:34 | INFO | /app/app/graphql/analytics/aggregator.py:76 - lifespan() | Trigger queue stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:92 - stop() | Stopping all workers
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-0 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-0 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-1 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-1 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-2 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-2 stopped
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:113 - _run() | Worker-3 cancelled
+2025-07-31 15:12:34 | DEBUG | /app/app/core/trigger_queue.py:115 - _run() | Worker-3 stopped
+2025-07-31 15:12:34 | INFO | /app/app/graphql/analytics/aggregator.py:76 - lifespan() | Trigger queue stopped

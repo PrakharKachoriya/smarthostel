@@ -21,3 +21,13 @@
 2025-07-31 00:19:48 GMT [27]: user=,db= LOG:  checkpoint starting: shutdown immediate
 2025-07-31 00:19:48 GMT [27]: user=,db= LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.001 s, total=0.017 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=127 kB; lsn=0/19C80E8, redo lsn=0/19C80E8
 2025-07-31 00:19:48 GMT [1]: user=,db= LOG:  database system is shut down
+2025-07-31 15:10:48 GMT [1]: user=,db= LOG:  starting PostgreSQL 17.5 (Debian 17.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2025-07-31 15:10:48 GMT [1]: user=,db= LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-07-31 15:10:48 GMT [1]: user=,db= LOG:  listening on IPv6 address "::", port 5432
+2025-07-31 15:10:48 GMT [1]: user=,db= LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-07-31 15:10:48 GMT [31]: user=,db= LOG:  database system was shut down at 2025-07-31 00:19:48 GMT
+2025-07-31 15:10:48 GMT [1]: user=,db= LOG:  database system is ready to accept connections
+2025-07-31 15:11:12 GMT [36]: user=[unknown],db=[unknown] LOG:  connection received: host=172.26.0.3 port=47324
+2025-07-31 15:11:12 GMT [36]: user=batlahouse,db=smartpg LOG:  connection authenticated: identity="batlahouse" method=scram-sha-256 (/var/lib/postgresql/data/pg_hba.conf:128)
+2025-07-31 15:11:12 GMT [36]: user=batlahouse,db=smartpg LOG:  connection authorized: user=batlahouse database=smartpg
+2025-07-31 15:12:34 GMT [36]: user=batlahouse,db=smartpg LOG:  disconnection: session time: 0:01:21.958 user=batlahouse database=smartpg host=172.26.0.3 port=47324
