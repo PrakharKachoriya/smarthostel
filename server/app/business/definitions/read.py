@@ -24,7 +24,7 @@ async def get_mealpending_data(
             FROM mess.daily_scans
             WHERE PG_ID = :pg_id
                 AND meal_type = :meal_type
-                AND timestamp::date = CURRENT_DATE
+                AND curr_date = CURRENT_DATE
         )
         
         , combined AS (
@@ -97,7 +97,7 @@ async def get_floorwisecount_data(
             FROM mess.daily_scans
             WHERE PG_ID = :pg_id
                 AND meal_type = :meal_type
-                AND timestamp::date = CURRENT_DATE
+                AND curr_date = CURRENT_DATE
         )
         
         , combined AS (
