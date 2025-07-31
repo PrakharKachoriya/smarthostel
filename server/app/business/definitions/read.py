@@ -17,7 +17,7 @@ async def get_mealpending_data(meal_type: str, date: date = date.today()):
         , meal_activity AS (
             SELECT tenant_id
             FROM analytics.meal_activity_fact
-            WHERE meal_type = :meal_type AND timestamp::date = :date
+            WHERE meal_type = :meal_type AND timestamp::date = CURRENT_DATE
         )
         
         , combined AS (
@@ -38,15 +38,15 @@ async def get_mealpending_data(meal_type: str, date: date = date.today()):
         
         , status_counts AS (
             SELECT
-                status,
-                COUNT(*) AS value_counts
+                status
+                , COUNT(*) AS value_counts
             FROM combined
             GROUP BY status
         )
         
         SELECT
-            s.status AS status,
-            COALESCE(sc.value_counts, 0) AS value_counts
+            s.status AS status
+            , COALESCE(sc.value_counts, 0) AS value_counts
         FROM (VALUES ('served'), ('pending')) AS s(status)
         LEFT JOIN status_counts sc ON (
             sc.status = s.status
@@ -55,7 +55,7 @@ async def get_mealpending_data(meal_type: str, date: date = date.today()):
     
     params = {
         "meal_type": meal_type,
-        "date": date
+        # "date": date
     }
     
     db_manager = get_db_manager(DB_URL)
@@ -76,26 +76,24 @@ async def get_floorwisecount_data(
     query = f"""
         WITH tenants AS (
             SELECT 
-                id AS tenant_id,
-                room_number,
+                id AS tenant_id
+                , room_number
             FROM master.tenants_dim
             WHERE room_number LIKE '{floor_number}%'
-            )
+        )
             
         , meal_activity AS (
             SELECT tenant_id
             FROM analytics.meal_activity_fact
             WHERE
                 meal_type = :meal_type
-                AND timestamp::date = :date
-                AND room_number LIKE '{floor_number}%'
+                AND timestamp::date = CURRENT_DATE
         )
         
         , combined AS (
             SELECT
                 t.tenant_id,
                 t.room_number,
-                t.floor,
                 (
                     CASE
                     WHEN m.tenant_id IS NULL
@@ -107,47 +105,56 @@ async def get_floorwisecount_data(
             LEFT JOIN meal_activity m
             ON t.tenant_id = m.tenant_id
         )
-        
-        SELECT 
-            room_number,
-            COUNT(CASE WHEN status = 'served' THEN 1 END) AS served_count,
-            COUNT(CASE WHEN status = 'pending' THEN 1 END) AS pending_count
-        FROM combined
-        GROUP BY room_number
+
+        room_status_counts AS (
+            SELECT
+                room_number,
+                status,
+                COUNT(*) AS count
+            FROM combined
+            GROUP BY room_number, status
+        ),
+
+        room_list AS (
+            SELECT DISTINCT room_number FROM tenants
+        ),
+
+        status_list AS (
+            SELECT unnest(ARRAY['pending', 'served']) AS status
+        ),
+
+        room_status_matrix AS (
+            SELECT 
+                rl.room_number,
+                sl.status
+            FROM room_list rl
+            CROSS JOIN status_list sl
+        )
+
+        SELECT
+            rsm.room_number,
+            rsm.status,
+            COALESCE(rsc.count, 0) AS value_counts
+        FROM room_status_matrix rsm
+        LEFT JOIN room_status_counts rsc
+            ON rsm.room_number = rsc.room_number AND rsm.status = rsc.status
+        ORDER BY rsm.room_number, rsm.status;
     """
     
     params = {
         "meal_type": meal_type,
         "floor_number": floor_number,
-        "date": date
+        # "date": date
     }
     
     db_manager = get_db_manager(DB_URL)
     try:
-        result = await db_manager.execute(query, params)
-        
-        # format here
-        room_numbers = [row["room_number"] for row in result]
-        served = [row["served_count"] for row in result]
-        pending = [row["pending_count"] for row in result]
-        
-        served_pending_tuples = []
-        for s, p in zip(served, pending):
-            new_type = (s, p)
-            served_pending_tuples.append(new_type)
-
-        return room_numbers, served_pending_tuples
-    
+        rows = await db_manager.execute(query, params)
+        for row in rows:
+            yield row
     except Exception as e:
         print(f"Error fetching floor wise data: {e}")
         return None
-    
-    # [501, 502]
-    # [1,2] s
-    # [4, 3] p
-    # for s, p in zip(served, pending):
-        # new_type = (s, p)
-        # new_list.append(new_type)
         
     
 

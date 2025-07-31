@@ -1,0 +1,55 @@
+config:
+  target: "ws://localhost:8000/graphql"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+  engine: "ws"
+
+scenarios:
+  - name: "Tenant 1 WebSocket Subscription"
+    engine: "ws"
+    flow:
+      - send:
+          text: >
+            {
+              "type": "connection_init",
+              "payload": {
+                "headers": {
+                  "X-Tenant-ID": "tenant1"
+                }
+              }
+            }
+      - send:
+          text: >
+            {
+              "id": "1",
+              "type": "start",
+              "payload": {
+                "query": "subscription { mealAdded { id name calories createdAt } }"
+              }
+            }
+      - think: 10
+
+  - name: "Tenant 2 WebSocket Subscription"
+    engine: "ws"
+    flow:
+      - send:
+          text: >
+            {
+              "type": "connection_init",
+              "payload": {
+                "headers": {
+                  "X-Tenant-ID": "tenant2"
+                }
+              }
+            }
+      - send:
+          text: >
+            {
+              "id": "2",
+              "type": "start",
+              "payload": {
+                "query": "subscription { mealAdded { id name calories createdAt } }"
+              }
+            }
+      - think: 10

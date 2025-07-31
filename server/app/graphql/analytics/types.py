@@ -1,5 +1,5 @@
 import strawberry
-
+from typing import List, Optional
 from app.graphql.db.types import Tenant
 
 @strawberry.type
@@ -7,22 +7,17 @@ class MealPending_PieChart:
     labels: list[str]
     values: list[int]
 
-@strawberry.type
-class MealTime_LineChart:
-    time_values: list[float]
-    values: list[int]
 
 @strawberry.type
-class FoodRating_LineChart:
-    ratings: list[int]
-    counts: list[int]
+class XAxis:
+    room_numbers: List[int]  # or List[str] depending on your schema
+
+@strawberry.type
+class YAxis:
+    pending: Optional[List[int]] = None
+    served: Optional[List[int]] = None
 
 @strawberry.type
 class FloorWiseCount_DoubleBarChart:
-    floors: list[int]
-    status_wise_counts: list[tuple[int, int]]
-
-
-@strawberry.type
-class Message:
-    message: list[Tenant]
+    x: XAxis
+    y: YAxis

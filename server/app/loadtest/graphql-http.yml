@@ -1,0 +1,37 @@
+config:
+  target: "http://localhost:8000/graphql/"
+  phases:
+  - duration: 20
+    arrivalRate: 100
+  - duration: 20
+    arrivalRate: 110
+  - duration: 20
+    arrivalRate: 120
+  defaults:
+    headers:
+      Content-Type: application/json
+  payload:
+    path: "meal_data.csv"
+    fields:
+      - tenantId
+      - roomNumber
+      - mealType
+  http:
+    timeout: 10000
+    keepAlive: true
+
+scenarios:
+  - name: "Add Mealactivity Mutation"
+    flow:
+      - post:
+          url: "/"
+          json:
+            query: |
+              mutation($data: MealActivityInput!) {
+                addMealactivity(data: $data)
+              }
+            variables:
+              data:
+                tenantId: "{{ tenantId }}"
+                roomNumber: "{{ roomNumber }}"
+                mealType: "{{ mealType }}"

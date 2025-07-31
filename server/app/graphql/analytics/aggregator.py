@@ -3,7 +3,7 @@ import asyncio
 from contextlib import asynccontextmanager
 
 from app.business.definitions.read import get_tenants as get_tenants_data
-from app.business.definitions.read import get_mealpending_data
+from app.business.definitions.read import get_mealpending_data, get_floorwisecount_data
 from app.core.trigger_queue import get_trigger_queue
 from app.core.pubsub import get_pub_sub
 from app.logger import AppLogger
@@ -38,23 +38,44 @@ async def handle_trigger(payload: dict):
         except Exception as e:
             logger.error(f"Error publishing meal pending pie chart: {e}")
     
+
     async def task_2():
-        logger.debug("Task 2 started")
-        res = [{**row} async for row in get_tenants_data()]
-        logger.debug(f"Task 2 completed with result: {res}")
-        await pubsub.publish(f"task_2_{payload["meal_type"]}", res)
+        topic = f"{payload["pg_key"]}__roomwise_count_5__{payload["meal_type"]}"
+        logger.debug(f"Task started for {topic}")
+        res = {}
+        room_data = {}
+        try:
+            async for row in get_floorwisecount_data(payload["meal_type"], "5"):
+                room = row["room_number"]
+                status = row["status"]
+                count = row["value_counts"]
+                room_data[room][status] = count
+
+                sorted_rooms = sorted(room_data.keys())
+
+            # Prepare counts aligned with sorted rooms
+            pending_counts = [room_data[room].get('pending', 0) for room in sorted_rooms]
+            served_counts = [room_data[room].get('served', 0) for room in sorted_rooms]
+
+            res = {
+                "x": {"room_numbers": sorted_rooms},
+                "y": {
+                    "pending": pending_counts,
+                    "served": served_counts
+                }
+            }
+        except Exception as e:
+            logger.error(f"Error fetching tenants data: {e}")
+        
+        logger.debug(f"Task tenants data completed with result: {res}")
+        await pubsub.publish(topic, res)
     
-    async def task_3():
-        logger.debug("Task 3 started")
-        res = [{**row} async for row in get_tenants_data()]
-        logger.debug(f"Task 3 completed with result: {res}")
-        await pubsub.publish(f"task_3_{payload["meal_type"]}", res)
     
     try:
         async with asyncio.TaskGroup() as tg:
             tg.create_task(task_1())
             tg.create_task(task_2())
-            tg.create_task(task_3())
+            
         logger.debug("All tasks completed successfully")
     except asyncio.CancelledError:
         logger.error("Tasks were cancelled")
