@@ -14,5 +14,5 @@ class Query:
         return [Tenant(**row) async for row in get_table_data("core", "tenant")]
     
     @strawberry.field
-    async def get_mealactivity(self, info: Info) -> list[QRScanLog]:
+    async def get_qr_scan_logs(self, info: Info) -> list[QRScanLog]:
         return [QRScanLog(**row) async for row in get_table_data("mess", "daily_scans")]
