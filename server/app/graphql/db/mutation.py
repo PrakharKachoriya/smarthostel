@@ -59,11 +59,12 @@ class Mutation:
         try:
             pg_id = info.context["pg_id"]
             async for row in get_table_data(
-                pg_id,
-                "core",
-                "tenant"
+                pg_id, "core", "tenant",
+                and_filters = {
+                    "tenant_id"
+                }
             ):
-                if row:
+                if not row ==:
                     raise Exception()
 
 

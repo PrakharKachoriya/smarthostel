@@ -172,7 +172,7 @@ async def get_table_data(
     pg_id: str,
     schema: str,
     table: str,
-    and_filters: Optional[dict[str, Any]] = None
+    and_filters: Optional[dict[str, Any]] = None,
 ):
     query = f"""
         SELECT *
@@ -192,3 +192,28 @@ async def get_table_data(
     except Exception as e:
         logger.error(f"Error printing all tenants {e}")
         yield {}
+
+
+async def get_table_row(
+    pg_id: str,
+    schema: str,
+    table: str,
+    and_filters: Optional[dict[str, Any]] = None,
+):
+    query = f"""
+        SELECT *
+        FROM {schema}.{table}
+        WHERE pg_id = :pg_id
+        {
+            ' AND '.join(
+                [f'{col} = {val}' for col, val in and_filters.items()]
+            ) if and_filters else ''
+        }
+    """
+    db_manager = get_db_manager(DB_URL)
+    try:
+        result = await db_manager.execute(query, fetch="one")
+        return result
+    except Exception as e:
+        logger.error(f"Error printing all tenants {e}")
+        return {}
