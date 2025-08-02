@@ -5,6 +5,7 @@ from app.graphql.db.types import (
     Pg, PgInput, Tenant, TenantInput, Staff, StaffInput,
     QRScanLog, QRScanLogInput
 )
+from app.business.definitions.read import get_table_data
 from app.business.definitions.write import add_new_pg, add_new_tenant, add_new_staff, add_new_qr_scan_log
 from app.business.ddl.methods import create_schema_if_not_exists, create_table_if_not_exists
 from app.logger import AppLogger
@@ -29,7 +30,7 @@ class Mutation:
     async def add_staff(self, data: StaffInput, info: Info) -> Staff | None:
         # print(data.__dict__)
         try:
-            pg_id = info.context["request"].headers.get("pg_id")
+            pg_id = info.context["pg_id"]
             result = await add_new_staff(data=data.to_pydantic(), pg_id=str(pg_id))
             return Staff(**result)
             
@@ -40,7 +41,7 @@ class Mutation:
     async def add_tenant(self, data: TenantInput, info: Info) -> Tenant | None:
         # print(data.__dict__)
         try:
-            pg_id = info.context["request"].headers.get("pg_id")
+            pg_id = info.context["pg_id"]
             # logger.info(f"Adding tenant to PG with ID: {pg_id}")
             result = await add_new_tenant(data=data.to_pydantic(), pg_id=str(pg_id))
             return Tenant(**result)
@@ -56,7 +57,16 @@ class Mutation:
     ) -> QRScanLog | None:
         
         try:
-            pg_id = info.context["request"].headers.get("pg_id")
+            pg_id = info.context["pg_id"]
+            async for row in get_table_data(
+                pg_id,
+                "core",
+                "tenant"
+            ):
+                if row:
+                    raise Exception()
+
+
             res = await add_new_qr_scan_log(data=data.to_pydantic(), pg_id=pg_id)
             
             trigger_payload = {
@@ -85,7 +95,7 @@ class Mutation:
         """Create a new table in the specified schema."""
         
         try:
-            # pg_id = info.context["request"].headers.get("pg_id")
+            # pg_id = info.context["pg_id"]
             # To be used for partitioning new table for pg id
             await create_table_if_not_exists(schema_name, table_name, columns)
         except Exception as e:

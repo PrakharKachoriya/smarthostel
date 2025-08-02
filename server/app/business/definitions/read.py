@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Optional, Any
 
 from app.core.database import get_db_manager
 from app.config import DB_URL
@@ -171,11 +172,17 @@ async def get_table_data(
     pg_id: str,
     schema: str,
     table: str,
+    and_filters: Optional[dict[str, Any]] = None
 ):
     query = f"""
         SELECT *
         FROM {schema}.{table}
         WHERE pg_id = :pg_id
+        {
+            ' AND '.join(
+                [f'{col} = {val}' for col, val in and_filters.items()]
+            ) if and_filters else ''
+        }
     """
     db_manager = get_db_manager(DB_URL)
     try:
