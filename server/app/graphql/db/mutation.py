@@ -26,7 +26,7 @@ class Mutation:
             return None
     
     @strawberry.mutation
-    async def add_tenant(self, data: StaffInput, info: Info) -> Staff | None:
+    async def add_staff(self, data: StaffInput, info: Info) -> Staff | None:
         # print(data.__dict__)
         try:
             pg_id = info.context["request"].headers.get("pg_id")
@@ -49,7 +49,7 @@ class Mutation:
             logger.error(e)
     
     @strawberry.mutation
-    async def add_mealactivity(
+    async def add_rq_scan_log(
         self,
         data: QRScanLogInput,
         info: Info

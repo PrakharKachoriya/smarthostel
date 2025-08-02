@@ -3,3 +3,4 @@ __pycache__/
 postgres_data/
 .DS_Store
 postgres_data.zip
+.idea/
