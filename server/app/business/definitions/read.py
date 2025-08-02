@@ -168,22 +168,18 @@ async def get_floorwisecount_data(
 
 
 async def get_table_data(
+    pg_id: str,
     schema: str,
     table: str,
-    filter: str | None = None
 ):
     query = f"""
         SELECT *
-        FROM :schema.:table
-        {'WHERE '+filter if filter else ''}
+        FROM {schema}.{table}
+        WHERE pg_id = :pg_id
     """
-    params = {
-        'schema': schema,
-        'table': table
-    }
     db_manager = get_db_manager(DB_URL)
     try:
-        result = await db_manager.execute(query, params)
+        result = await db_manager.execute(query)
         for row in result:
             yield row
     except Exception as e:
