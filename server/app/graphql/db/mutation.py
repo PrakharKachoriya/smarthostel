@@ -5,7 +5,7 @@ from app.graphql.db.types import (
     Pg, PgInput, Tenant, TenantInput, Staff, StaffInput,
     QRScanLog, QRScanLogInput
 )
-from app.business.definitions.read import get_table_data
+from app.business.definitions.read import get_table_row
 from app.business.definitions.write import add_new_pg, add_new_tenant, add_new_staff, add_new_qr_scan_log
 from app.business.ddl.methods import create_schema_if_not_exists, create_table_if_not_exists
 from app.logger import AppLogger
@@ -58,15 +58,25 @@ class Mutation:
         
         try:
             pg_id = info.context["pg_id"]
-            async for row in get_table_data(
+            tenant = await get_table_row(
                 pg_id, "core", "tenant",
                 and_filters = {
-                    "tenant_id"
+                    "id": data.tenant_id
                 }
-            ):
-                if not row ==:
-                    raise Exception()
+            )
+            if not tenant:
+                raise Exception('Tenant not registered in PG')
 
+            tenant_has_scanned = await get_table_row(
+                pg_id, "mess", "daily_scans",
+                and_filters = {
+                    "tenant_id": data.tenant_id,
+                    "meal_type": data.meal_type
+                }
+            )
+
+            if tenant_has_scanned:
+                raise Exception('Tenant has already scanned')
 
             res = await add_new_qr_scan_log(data=data.to_pydantic(), pg_id=pg_id)
             
