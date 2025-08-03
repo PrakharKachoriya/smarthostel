@@ -5,8 +5,9 @@ from graphql import GraphQLError
 
 from app.logger import AppLogger
 from app.features.dashboard.mess.utils import trigger_dashboard_workers
-from app.features.dashboard.mess.types import QRScanLog, QRScanLogInput
-from app.features.users.tenant.resolver import get_tenant_resolver
+from app.features.dashboard.mess.types import QRScanLog, QRScanLogInput, GetQRScanLog
+from app.features.users.tenant.types import GetTenant
+from app.features.users.tenant.resolver import get_tenant_by_pg_resolver
 from app.features.dashboard.mess.resolver import (
     get_qr_scan_log_resolver,
     add_qr_scan_log_resolver
@@ -18,22 +19,27 @@ logger = AppLogger().get_logger()
 class QRScanMutation:
     @mutation
     async def add_qr_scan_log(
-            self,
-            data: QRScanLogInput,
-            info: Info
+        self,
+        data: QRScanLogInput,
+        info: Info
     ) -> QRScanLog:
 
         pg_id = info.context["pg_id"]
         try:
-            tenant = await get_tenant_resolver(tenant_id=data.tenant_id, pg_id=pg_id)
+            tenant = await get_tenant_by_pg_resolver(
+                data=GetTenant(id=data.tenant_id),
+                pg_id=pg_id
+            )
             if not tenant:
                 raise Exception('Tenant not registered in PG')
 
             tenant_has_scanned = await get_qr_scan_log_resolver(
                 pg_id=pg_id,
-                tenant_id=data.tenant_id,
-                meal_type=data.meal_type,
-                curr_date=date.today()
+                data=GetQRScanLog(
+                    tenant_id=data.tenant_id,
+                    meal_type=data.meal_type,
+                    curr_date=date.today()
+                )
             )
             if tenant_has_scanned:
                 raise Exception('Tenant has already scanned')

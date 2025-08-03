@@ -18,6 +18,13 @@ class Tenant:
     created_at: Optional[date] = None
 
 
+@type
+class GetTenant:
+    id: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
+
+
 @pydantic_input(model=CreateTenant, all_fields=True)
 class TenantInput:
     pass

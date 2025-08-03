@@ -16,6 +16,13 @@ class Staff:
     role: Optional[str] = None
     created_at: Optional[date] = None
 
+@type
+class GetStaff:
+    id: Optional[str] = None
+    phone_number: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
+
 
 @pydantic_input(model=CreateStaff, all_fields=True)
 class StaffInput:

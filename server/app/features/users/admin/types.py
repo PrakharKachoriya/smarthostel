@@ -19,6 +19,13 @@ class Pg:
     create_at: Optional[date] = None
 
 
+@type
+class GetPg:
+    id: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
+
+
 @pydantic_input(model=CreatePg, all_fields=True)
 class PgInput:
     pass

@@ -18,9 +18,7 @@ class QRScanQuery:
         try:
             res = await get_qr_scan_log_resolver(
                 pg_id=pg_ig,
-                tenant_id=data.tenant_id,
-                meal_type=data.meal_type,
-                curr_date=data.curr_date
+                data=data
             )
             return res
         except Exception as e:

@@ -11,7 +11,7 @@ from app.features.shared.utils import (
 
 logger = AppLogger().get_logger()
 
-async def get_table_data(
+async def get_table_data_by_pg(
     pg_id: str,
     schema: str,
     table: str,
@@ -44,7 +44,7 @@ async def get_table_data(
         logger.error(f"Error printing all tenants {e}")
         yield {}
 
-async def get_table_row(
+async def get_table_row_by_pg(
     pg_id: str,
     schema: str,
     table: str,
@@ -102,6 +102,65 @@ async def delete_table_row(
             params[param_key] = val
         query += " AND " + " AND ".join(filter_clauses)
 
+
+    db_manager = get_db_manager(DB_URL)
+    try:
+        result = await db_manager.execute(query, params, fetch="one")
+        return result
+    except Exception as e:
+        logger.error(f"Error printing all tenants {e}")
+        return {}
+
+
+async def get_table_data_ext(
+    schema: str,
+    table: str,
+    and_filters: Optional[dict[str, Any]] = None,
+):
+    query = f"""
+        SELECT *
+        FROM {schema}.{table}
+    """
+
+    params = {}
+
+    if and_filters:
+        filter_clauses = []
+        for idx, (col, val) in enumerate(and_filters.items()):
+            param_key = f"filter_{idx}"
+            filter_clauses.append(f"{col} = :{param_key}")
+            params[param_key] = val
+        query += " WHERE " + " AND ".join(filter_clauses)
+
+    db_manager = get_db_manager(DB_URL)
+    try:
+        result = await db_manager.execute(query, params)
+        for row in result:
+            yield row
+    except Exception as e:
+        logger.error(f"Error printing all tenants {e}")
+        yield {}
+
+
+async def get_table_row_ext(
+    schema: str,
+    table: str,
+    and_filters: Optional[dict[str, Any]] = None,
+):
+    query = f"""
+        SELECT *
+        FROM {schema}.{table}
+    """
+
+    params = {}
+
+    if and_filters:
+        filter_clauses = []
+        for idx, (col, val) in enumerate(and_filters.items()):
+            param_key = f"filter_{idx}"
+            filter_clauses.append(f"{col} = :{param_key}")
+            params[param_key] = val
+        query += " WHERE " + " AND ".join(filter_clauses)
 
     db_manager = get_db_manager(DB_URL)
     try:
