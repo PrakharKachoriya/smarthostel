@@ -50,7 +50,7 @@ class Mutation:
             logger.error(e)
     
     @strawberry.mutation
-    async def add_rq_scan_log(
+    async def add_qr_scan_log(
         self,
         data: QRScanLogInput,
         info: Info
@@ -87,6 +87,8 @@ class Mutation:
             }
             
             await trigger_queue.enqueue(trigger_payload)
+
+            return QRScanLog(**res)
         except Exception as e:
             logger.error(f"Error adding meal activity: {e}")
             return None

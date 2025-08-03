@@ -178,15 +178,23 @@ async def get_table_data(
         SELECT *
         FROM {schema}.{table}
         WHERE pg_id = :pg_id
-        {
-            ' AND '.join(
-                [f'{col} = {val}' for col, val in and_filters.items()]
-            ) if and_filters else ''
-        }
     """
+
+    params = {
+        "pg_id": pg_id
+    }
+
+    if and_filters:
+        filter_clauses = []
+        for idx, (col, val) in enumerate(and_filters.items()):
+            param_key = f"filter_{idx}"
+            filter_clauses.append(f"{col} = :{param_key}")
+            params[param_key] = val
+        query += " AND " + " AND ".join(filter_clauses)
+
     db_manager = get_db_manager(DB_URL)
     try:
-        result = await db_manager.execute(query)
+        result = await db_manager.execute(query, params)
         for row in result:
             yield row
     except Exception as e:
@@ -204,15 +212,24 @@ async def get_table_row(
         SELECT *
         FROM {schema}.{table}
         WHERE pg_id = :pg_id
-        {
-            ' AND '.join(
-                [f'{col} = {val}' for col, val in and_filters.items()]
-            ) if and_filters else ''
-        }
     """
+
+    params = {
+        "pg_id": pg_id
+    }
+
+    if and_filters:
+        filter_clauses = []
+        for idx, (col, val) in enumerate(and_filters.items()):
+            param_key = f"filter_{idx}"
+            filter_clauses.append(f"{col} = :{param_key}")
+            params[param_key] = val
+        query += " AND " + " AND ".join(filter_clauses)
+
+
     db_manager = get_db_manager(DB_URL)
     try:
-        result = await db_manager.execute(query, fetch="one")
+        result = await db_manager.execute(query, params, fetch="one")
         return result
     except Exception as e:
         logger.error(f"Error printing all tenants {e}")
