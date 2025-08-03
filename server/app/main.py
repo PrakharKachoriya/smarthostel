@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.logger import AppLogger
 from app.core.aggregator import lifespan
 from app.graphql.router import graphql_router
+from app.graphql.router import graphql_router_v2
 
 AppLogger("app")
 app = FastAPI(lifespan=lifespan)
@@ -17,3 +18,4 @@ app.add_middleware(
 )
 
 app.include_router(graphql_router, prefix="/graphql")
+app.include_router(graphql_router_v2, prefix="/v2/graphql")
