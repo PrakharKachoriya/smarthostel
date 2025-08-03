@@ -7,6 +7,12 @@ from app.graphql.db.query import Query
 from app.graphql.db.mutation import Mutation
 from app.graphql.analytics.subscriptions import Subscription
 
-schema = Schema(query=Query, mutation=Mutation, subscription=Subscription)
+from app.graphql.queries import Query as v2_Query
+from app.graphql.mutations import Mutation as v2_Mutation
 
+
+schema = Schema(query=Query, mutation=Mutation, subscription=Subscription)
 graphql_router = GraphQLRouter(schema, context_getter=get_context)
+
+schema_v2 = Schema(query=v2_Query, mutation=v2_Mutation)
+graphql_router_v2 = GraphQLRouter(schema_v2, context_getter=get_context)

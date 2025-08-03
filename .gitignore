@@ -5,3 +5,6 @@ postgres_data/
 postgres_data.zip
 .idea/
 server/logs/
+.smartpg/
+*/.venv
+server/.venv
