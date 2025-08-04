@@ -33,9 +33,9 @@ async def get_qr_scan_log_resolver(
     result = await get_table_row_by_pg(
         pg_id, "mess", "daily_scans",
         and_filters=filters
-    )
-    if not result:
-        raise Exception("Tenant does not exist")
+    ) or {}
+    # if not result:
+    #     raise Exception("Tenant does not exist")
 
     return QRScanLog(**result)
 

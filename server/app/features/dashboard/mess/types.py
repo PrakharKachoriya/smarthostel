@@ -8,8 +8,8 @@ from app.features.dashboard.mess.models import CreateQRScanLog
 
 @strawberry.type
 class QRScanLog:
-    id: Optional[str]
-    pg_id: Optional[str]
+    id: Optional[str] = None
+    pg_id: Optional[str] = None
     tenant_id: Optional[str] = None
     meal_type: Optional[str] = None
     curr_timestamp: Optional[datetime] = None # Can be also managed in SQL as CURRENT_TIMESTAMP

@@ -41,7 +41,7 @@ class QRScanMutation:
                     curr_date=date.today()
                 )
             )
-            if tenant_has_scanned:
+            if tenant_has_scanned.id:
                 raise Exception('Tenant has already scanned')
 
             res = await add_qr_scan_log_resolver(data=data, pg_id=pg_id)
