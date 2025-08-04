@@ -1,4 +1,4 @@
-from strawberry import type, mutation
+import strawberry
 from strawberry.types import Info
 from graphql import GraphQLError
 
@@ -12,9 +12,10 @@ from app.features.users.tenant.resolver import (
 
 logger = AppLogger().get_logger()
 
-@type
+
+@strawberry.type
 class TenantMutation:
-    @mutation
+    @strawberry.mutation
     async def add_tenant(self, data: TenantInput, info: Info) -> Tenant:
         pg_id = info.context["pg_id"]
         try:
@@ -24,7 +25,7 @@ class TenantMutation:
             logger.error(e)
             raise GraphQLError(str(e))
 
-    @mutation
+    @strawberry.mutation
     async def delete_tenant(self, tenant_id: str, info: Info) -> Tenant:
         pg_id = info.context["pg_id"]
         try:

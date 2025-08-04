@@ -1,5 +1,5 @@
 from datetime import date
-from strawberry import type, mutation
+import strawberry
 from strawberry.types import Info
 from graphql import GraphQLError
 
@@ -15,9 +15,9 @@ from app.features.dashboard.mess.resolver import (
 
 logger = AppLogger().get_logger()
 
-@type
+@strawberry.type
 class QRScanMutation:
-    @mutation
+    @strawberry.mutation
     async def add_qr_scan_log(
         self,
         data: QRScanLogInput,

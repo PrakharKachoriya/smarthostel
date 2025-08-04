@@ -1,11 +1,11 @@
-from strawberry import type
+import strawberry
 from typing import Optional
 from datetime import date
 from strawberry.experimental.pydantic import input as pydantic_input
 
 from app.features.users.tenant.models import CreateTenant
 
-@type
+@strawberry.type
 class Tenant:
     id: Optional[str] = None
     pg_id: Optional[str] = None
@@ -18,7 +18,7 @@ class Tenant:
     created_at: Optional[date] = None
 
 
-@type
+@strawberry.input
 class GetTenant:
     id: Optional[str] = None
     email: Optional[str] = None

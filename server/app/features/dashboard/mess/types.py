@@ -1,13 +1,12 @@
-from strawberry import type
+import strawberry
 from typing import Optional
 from datetime import date, datetime
-from datetime import datetime
 from strawberry.experimental.pydantic import input as pydantic_input
 
 from app.features.dashboard.mess.models import CreateQRScanLog
 
 
-@type
+@strawberry.type
 class QRScanLog:
     id: Optional[str]
     pg_id: Optional[str]
@@ -17,7 +16,7 @@ class QRScanLog:
     curr_date: Optional[date] = None
 
 
-@type
+@strawberry.input
 class GetQRScanLog:
     tenant_id: Optional[str] = None
     meal_type: Optional[str] = None

@@ -1,4 +1,4 @@
-from strawberry import type, field
+import strawberry
 from strawberry.types import Info
 from graphql import GraphQLError
 
@@ -6,9 +6,9 @@ from app.features.dashboard.mess.types import GetQRScanLog, QRScanLog
 from app.features.dashboard.mess.resolver import get_qr_scan_log_resolver
 
 
-@type
+@strawberry.type
 class QRScanQuery:
-    @field
+    @strawberry.field
     async def get_qr_scan_log(
         self,
         data: GetQRScanLog,

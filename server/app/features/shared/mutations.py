@@ -1,4 +1,4 @@
-from strawberry import type, mutation
+import strawberry
 from strawberry.types import Info
 from graphql import GraphQLError
 
@@ -11,9 +11,9 @@ from app.features.shared.services import (
 
 logger = AppLogger().get_logger()
 
-@type
+@strawberry.type
 class SharedMutation:
-    @mutation
+    @strawberry.mutation
     async def create_schema(self, schema_name: str, info: Info) -> None:
         """Create a new schema in the database."""
 
@@ -24,7 +24,7 @@ class SharedMutation:
             raise GraphQLError(f"Error creating schema {schema_name}: {e}")
 
 
-    @mutation
+    @strawberry.mutation
     async def create_table(self, schema_name: str, table_name: str, columns: list[str], info: Info) -> None:
         """Create a new table in the specified schema."""
 

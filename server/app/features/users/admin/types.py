@@ -1,11 +1,11 @@
-from strawberry import type
+import strawberry
 from typing import Optional
 from datetime import date
 from strawberry.experimental.pydantic import input as pydantic_input
 
 from app.features.users.admin.models import CreatePg
 
-@type
+@strawberry.type
 class Pg:
     id: Optional[str] = None
     name: Optional[str] = None
@@ -19,7 +19,7 @@ class Pg:
     create_at: Optional[date] = None
 
 
-@type
+@strawberry.input
 class GetPg:
     id: Optional[str] = None
     email: Optional[str] = None

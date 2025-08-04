@@ -1,4 +1,4 @@
-from strawberry import type, mutation
+import strawberry
 from strawberry.types import Info
 from graphql import GraphQLError
 
@@ -12,9 +12,9 @@ from app.features.users.admin.resolver import (
 
 logger = AppLogger().get_logger()
 
-@type
+@strawberry.type
 class PgMutation:
-    @mutation
+    @strawberry.mutation
     async def add_pg(self, data: PgInput, info: Info) -> Pg:
         try:
             res = await add_pg_resolver(data=data)
@@ -23,7 +23,7 @@ class PgMutation:
             logger.error(e)
             raise GraphQLError(str(e))
 
-    @mutation
+    @strawberry.mutation
     async def delete_pg(self, info: Info) -> Pg:
         pg_id = info.context["pg_id"]
         try:

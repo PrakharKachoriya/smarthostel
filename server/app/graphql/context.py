@@ -1,4 +1,4 @@
-from fastapi import Request, Depends
+from fastapi import Depends
 
 from app.dependencies.auth import verify_pg_id
 

@@ -1,4 +1,4 @@
-from strawberry import type, field
+import strawberry
 from strawberry.types import Info
 from graphql import GraphQLError
 
@@ -12,9 +12,10 @@ from app.features.users.staff.resolver import (
 
 logger = AppLogger().get_logger()
 
-@type
+
+@strawberry.type
 class StaffQuery:
-    @field
+    @strawberry.field
     async def get_staff(self, data: GetStaff, info: Info) -> Staff:
         pg_id = info.context["pg_id"]
         try:
@@ -25,7 +26,7 @@ class StaffQuery:
             raise GraphQLError(message=str(e))
 
 
-    @field
+    @strawberry.field
     async def get_staffs(self, info: Info) -> list[Staff]:
         pg_id = info.context["pg_id"]
         try:
@@ -34,8 +35,8 @@ class StaffQuery:
         except Exception as e:
             raise GraphQLError(f"Failed to fetch tenants: {str(e)}")
 
-    @field
-    async def login_staff(self, data: GetStaff):
+    @strawberry.field
+    async def login_staff(self, data: GetStaff, info: Info) -> Staff:
         try:
             res = await login_staff_resolver(data=data)
             return res

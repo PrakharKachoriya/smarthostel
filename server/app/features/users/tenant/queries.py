@@ -1,4 +1,4 @@
-from strawberry import type, field
+import strawberry
 from strawberry.types import Info
 from graphql import GraphQLError
 
@@ -12,9 +12,9 @@ from app.features.users.tenant.resolver import (
 
 logger = AppLogger().get_logger()
 
-@type
+@strawberry.type
 class TenantQuery:
-    @field
+    @strawberry.field
     async def get_tenant(self, data: GetTenant, info: Info) -> Tenant:
         pg_id = info.context["pg_id"]
         try:
@@ -22,21 +22,24 @@ class TenantQuery:
             return res
         except Exception as e:
             logger.error(e)
-            raise GraphQLError(message=str(e))
+            # return Tenant(**{})
+            raise GraphQLError(str(e))
 
-    @field
+    @strawberry.field
     async def get_tenants(self, info: Info) -> list[Tenant]:
         pg_id = info.context["pg_id"]
         try:
             res = await get_tenants_resolver(pg_id=pg_id)
             return res
         except Exception as e:
+            # return [Tenant(**{})]
             raise GraphQLError(f"Failed to fetch tenants: {str(e)}")
 
-    @field
-    async def login_tenant(self, data: GetTenant):
+    @strawberry.field
+    async def login_tenant(self, data: GetTenant, info: Info) -> Tenant:
         try:
             res = await login_tenant_resolver(data=data)
             return res
         except Exception as e:
+            # return Tenant(**{})
             raise GraphQLError(f"Failed to fetch tenants: {str(e)}")
