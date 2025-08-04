@@ -16,7 +16,7 @@ class Pg:
     city: Optional[str] = None
     state: Optional[str] = None
     postal_code: Optional[str] = None
-    create_at: Optional[date] = None
+    created_at: Optional[date] = None
 
 
 @strawberry.input
