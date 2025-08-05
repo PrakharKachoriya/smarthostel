@@ -1,1 +1,1 @@
-from auth import verify_pg_id
+from .auth import verify_pg_id

@@ -1,4 +1,4 @@
-from base import BaseAppException
+from .base import BaseAppException
 
 class UnauthorizedException(BaseAppException):
     def __init__(self):

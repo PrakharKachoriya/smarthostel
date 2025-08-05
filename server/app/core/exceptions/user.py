@@ -1,4 +1,4 @@
-from base import BaseAppException
+from .base import BaseAppException
 
 # --------------------------------------------------
 # 42X series is for tenants

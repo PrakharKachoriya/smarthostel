@@ -1,4 +1,4 @@
-from base import BaseAppException
+from .base import BaseAppException
 
 # --------------------------------------------------
 # 41X series is for credentials and schema

@@ -20,5 +20,5 @@ schema_v2 = Schema(query=Query_v2, mutation=Mutation_v2)
 graphql_router_v2 = GraphQLRouter(
     schema_v2,
     context_getter=get_context,
-    # middleware=[graphql_exception_handler]
+    # middleware={graphql_exception_handler}
 )
