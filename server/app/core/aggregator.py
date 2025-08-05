@@ -2,7 +2,7 @@ import asyncio
 
 from contextlib import asynccontextmanager
 
-from app.business.definitions.read import (
+from app.features.dashboard.mess.services import (
     get_mealpending_data,
     get_floorwisecount_data
 )
@@ -19,7 +19,7 @@ async def handle_trigger(payload: dict):
     """Handle the trigger payload."""
     logger.debug(f"Handling trigger payload: {payload}")
     
-    async def task_1():
+    async def mealpending_piechart_task():
         topic = f"{payload["pg_key"]}_mealpending_piechart_{payload["meal_type"]}"
         logger.debug(f"Task started for {topic}")
         res = {
@@ -28,8 +28,8 @@ async def handle_trigger(payload: dict):
         }
         try:
             async for row in get_mealpending_data(
-                pd_id=payload["pg_key"],
-                meal_type=payload["meal_type"]
+                pg_id = payload["pg_key"],
+                meal_type = payload["meal_type"]
             ):
                 res["labels"].append(row["status"])
                 res["values"].append(row["value_counts"])
@@ -44,8 +44,10 @@ async def handle_trigger(payload: dict):
             logger.error(f"Error publishing meal pending pie chart: {e}")
     
 
-    async def task_2():
-        topic = f"{payload["pg_key"]}__roomwise_count_5__{payload["meal_type"]}"
+    async def floorwisecount_doublebarchart_task(
+        floor: int
+    ):
+        topic = f"{payload["pg_key"]}__roomwise_count__{payload["meal_type"]}"
         logger.debug(f"Task started for {topic}")
         res = {}
         room_data = {}
@@ -53,7 +55,7 @@ async def handle_trigger(payload: dict):
             async for row in get_floorwisecount_data(
                 pg_id=payload["pg_key"],
                 meal_type=payload["meal_type"],
-                floor_number=5
+                floor=floor
             ):
                 room = row["room_number"]
                 status = row["status"]
@@ -82,8 +84,8 @@ async def handle_trigger(payload: dict):
     
     try:
         async with asyncio.TaskGroup() as tg:
-            tg.create_task(task_1())
-            tg.create_task(task_2())
+            tg.create_task(mealpending_piechart_task())
+            tg.create_task(floorwisecount_doublebarchart_task(5))
             
         logger.debug("All tasks completed successfully")
     except asyncio.CancelledError:

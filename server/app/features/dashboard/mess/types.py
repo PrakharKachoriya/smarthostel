@@ -1,5 +1,5 @@
 import strawberry
-from typing import Optional
+from typing import Optional, List
 from datetime import date, datetime
 from strawberry.experimental.pydantic import input as pydantic_input
 
@@ -26,3 +26,25 @@ class GetQRScanLog:
 @pydantic_input(model=CreateQRScanLog, all_fields=True)
 class QRScanLogInput:
     pass
+
+
+# charts
+@strawberry.type
+class MealPending_PieChart:
+    labels: list[str]
+    values: list[int]
+
+
+@strawberry.type
+class XAxis:
+    room_numbers: List[int]
+
+@strawberry.type
+class YAxis:
+    pending: Optional[List[int]] = None
+    served: Optional[List[int]] = None
+
+@strawberry.type
+class FloorWiseCount_DoubleBarChart:
+    x: XAxis
+    y: YAxis

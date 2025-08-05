@@ -1,6 +1,6 @@
 import strawberry
 from strawberry.types import Info
-from typing import AsyncGenerator, Any
+from typing import AsyncGenerator
 from app.logger import AppLogger
 from app.core.pubsub import get_pub_sub
 from app.graphql.analytics.types import (
@@ -9,7 +9,6 @@ from app.graphql.analytics.types import (
     XAxis,
     YAxis
 )
-from app.graphql.db.types import Tenant
 
 logger = AppLogger().get_logger()
 

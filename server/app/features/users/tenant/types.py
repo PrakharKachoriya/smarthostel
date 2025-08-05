@@ -13,7 +13,8 @@ class Tenant:
     email: Optional[str] = None
     password: Optional[str] = None
     phone_number: Optional[str] = None
-    room_number: Optional[int] = None
+    room_number: Optional[str] = None
+    floor: Optional[int] = None
     join_date: Optional[date] = None
     created_at: Optional[date] = None
 

@@ -10,7 +10,7 @@ class MealPending_PieChart:
 
 @strawberry.type
 class XAxis:
-    room_numbers: List[int]  # or List[str] depending on your schema
+    room_numbers: List[int]
 
 @strawberry.type
 class YAxis:
