@@ -8,5 +8,6 @@ class CreateTenant(BaseModel):
     email: str
     password: str
     phone_number: str
-    room_number: int
+    floor: int
+    room_number: str
     join_date: Optional[date] = None
